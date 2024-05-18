@@ -2,12 +2,14 @@
 #include <../JuceLibraryCode/JuceHeader.h>
 
 #include "lldsp.h"
-#include "lldsp.oscillators.signalgenerator.h"
+#include "lldsp.oscillators.oscillator.h"
+#include "lldsp.dsp.h"
+#include "lldsp.effects.reverb.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {
 public:
-	SynthVoice() = default;
+    SynthVoice() = default;
 
     // SynthesizerVoice
     bool canPlaySound(juce::SynthesiserSound* sound);
@@ -29,7 +31,13 @@ private:
     double m_frequency = 0.0f;
     double m_level = 0.0f;
 
-    lldsp::oscillators::SignalGenerator m_oscillator;
-    lldsp::ADSR m_envelope;
+    lldsp::oscillators::Oscillator m_modulator;
+    lldsp::ADSR m_modulatorEnvelope;
+    lldsp::oscillators::Oscillator m_carrier;
+    lldsp::ADSR m_carrierEnvelope;
+
+    std::unique_ptr<lldsp::dsp::BiQuadFilter> m_filter;
+    std::unique_ptr<lldsp::effects::Reverb> m_reverb;
+
 
 };

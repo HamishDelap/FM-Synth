@@ -2,8 +2,15 @@
 
 <JUCERPROJECT id="L9HBol" name="FM Synth" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              cppLanguageStandard="17" headerPath="C:\Users\hamis\Documents\Dev\AudioDevelopment\LetsLearnDSP\src">
+              cppLanguageStandard="17" headerPath="C:\Users\hamis\Documents\Dev\AudioDevelopment\LetsLearnDSP\src"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="rd4STg" name="FM Synth">
+    <FILE id="JFFKZE" name="lldsp.oscillators.h" compile="0" resource="0"
+          file="../../LetsLearnDSP/src/lldsp.oscillators.h"/>
+    <FILE id="PV6GHK" name="lldsp.oscillators.oscillator.cpp" compile="1"
+          resource="0" file="../../LetsLearnDSP/src/lldsp.oscillators.oscillator.cpp"/>
+    <FILE id="nxmXzj" name="lldsp.oscillators.oscillator.h" compile="0"
+          resource="0" file="../../LetsLearnDSP/src/lldsp.oscillators.oscillator.h"/>
     <GROUP id="{AA71D200-8088-7778-4781-35418D43852C}" name="Source">
       <FILE id="HyA5yw" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="FwI5sU" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
