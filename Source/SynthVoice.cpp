@@ -1,6 +1,10 @@
 #pragma once
 #include "SynthVoice.h"
 #include "SynthSound.h"
+#include <fstream>
+
+// Ensure the file is open once at the start of your application
+static std::ofstream logFile("output_log.csv");
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 {
@@ -10,22 +14,29 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
-	m_frequency = juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber);
+	m_trueFrequency = juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber);
+	UpdateFrequency();
 	m_level = 1; velocity * 0.15;
 
-	m_modulatorEnvelope.SetParameters({ 0.05, 0.05, 0.7, 0.4 });
-	m_modulatorEnvelope.NoteOn();
+	m_modulatorEnvelope.SetParameters(m_parameters.modADSRParams);
+	m_carrierEnvelope.SetParameters(m_parameters.carrierADSRParams);
+	m_filterEnvelope.SetParameters(m_parameters.filterADSRParams);
 
-	m_carrierEnvelope.SetParameters({ 0.05, 0.05, 0.7, 0.4 });
+	m_noteOn = true;
+
+	m_modulatorEnvelope.NoteOn();
 	m_carrierEnvelope.NoteOn();
+	m_filterEnvelope.NoteOn();
 }
 
 void SynthVoice::stopNote(float velocity, bool allowTailOff)
 {
+	m_noteOn = false;
 	if (allowTailOff)
 	{
 		m_modulatorEnvelope.NoteOff();
 		m_carrierEnvelope.NoteOff();
+		m_filterEnvelope.NoteOff();
 	}
 	else
 	{
@@ -35,7 +46,24 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
 
 void SynthVoice::pitchWheelMoved(int newPitchWheelValue)
 {
+	// Let's assume a pitch bend range of ±2 semitones for this example
+	auto pitchBendRange = 2.0f; // in semitones
 
+	// Normalize the pitch wheel value to a range of -1.0 to 1.0
+	auto pitchBend = (newPitchWheelValue - 8192) / 8192.0f;
+
+	// Calculate the pitch change in semitones
+	m_pitchBendChange = pitchBendRange * pitchBend;
+	if (m_noteOn)
+	{
+		UpdateFrequency();
+	}
+}
+    
+void SynthVoice::UpdateFrequency()
+{
+	// Update the frequency of the oscillator based on the pitch change
+	m_newFrequency = m_trueFrequency * std::pow(2.0f, m_pitchBendChange / 12.0f);
 }
 
 void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
@@ -54,27 +82,41 @@ void SynthVoice::SetSampleRate(const double sampleRate)
 	m_modulator.SetWaveForm(lldsp::oscillators::Waveform::Sin);
 
 	m_carrier.SetSampleRate(sampleRate);
-	m_carrier.SetWaveForm(lldsp::oscillators::Waveform::Sawtooth);
 
 	m_modulatorEnvelope.SetSampleRate(sampleRate);
 	m_carrierEnvelope.SetSampleRate(sampleRate);
+	m_filterEnvelope.SetSampleRate(sampleRate);
 
-	m_filter = std::make_unique<lldsp::dsp::BiQuadFilter>(sampleRate);
-	m_filter->SetCutoff(200, 1.0, 1);
-
-	m_reverb = std::make_unique<lldsp::effects::Reverb>(sampleRate);
+	m_filter.SetSampleRate(sampleRate);
+}
+    
+void SynthVoice::SetParameters(const Parameters& parameters)
+{
+	m_parameters = std::move(parameters);
+	m_modulatorEnvelope.SetParameters(m_parameters.modADSRParams);
+	m_carrierEnvelope.SetParameters(m_parameters.carrierADSRParams);
+	m_filterEnvelope.SetParameters(m_parameters.filterADSRParams);
+	m_carrier.SetWaveForm(m_parameters.carrierWaveform);
+	m_modulator.SetWaveForm(m_parameters.carrierWaveform);
 }
 
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
+	// During processing
 	for (int sampleIndex = 0; sampleIndex < numSamples; sampleIndex++)
 	{
-		double modulatorOutput = m_modulator.Sample(m_frequency / 2, 0.1);
-		modulatorOutput = m_modulatorEnvelope.Process(modulatorOutput);
-		double sample = m_carrier.Sample(m_frequency + modulatorOutput, 1);
-		sample = m_carrierEnvelope.Process(sample);
-		m_filter->Process(sample);
-		m_reverb->Process(sample, 4.0, 1.0);
+		double modulatorOutput = m_modulator.Sample((m_newFrequency / m_parameters.modRatio), 1);
+		//modulatorOutput = m_modulatorEnvelope.Process(modulatorOutput);
+		double sample = m_carrier.Sample(std::abs(m_newFrequency * (modulatorOutput * m_parameters.modLevel)), 1);
+		sample = m_carrierEnvelope.Process(sample); 
+
+       
+		if (m_parameters.filterCutoff != 0)
+		{
+			m_filter.SetCutoff(m_parameters.filterCutoff, 1, m_parameters.filterQ);
+			//m_filter.SetCutoff(m_filterEnvelope.Process(m_parameters.filterCutoff), 1, m_parameters.filterQ);
+			sample = m_filter.Process(sample);
+		}
 
 		for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
 		{

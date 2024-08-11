@@ -21,12 +21,12 @@ FMSynthAudioProcessor::FMSynthAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), m_stateManager(*this)
 #endif
 {
     m_synthesizer.clearVoices();
     // Create 5 voices.
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 16; i++) {
         m_synthesizer.addVoice(new SynthVoice());
     }
     // Tidy up unwanted sounds.
@@ -108,6 +108,9 @@ void FMSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     m_synthesizer.setCurrentPlaybackSampleRate(sampleRate);
     m_midiMessageCollector.reset(sampleRate);
 
+    // Effects
+	m_reverb = std::make_unique<lldsp::effects::Reverb>(sampleRate);
+
     for (int i = 0; i < m_synthesizer.getNumVoices(); i++) {
         // Check that myVoice is a SynthVoice*
         if (SynthVoice* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
@@ -147,40 +150,65 @@ bool FMSynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
   #endif
 }
 #endif
+    
+void FMSynthAudioProcessor::UpdateVoiceParameters()
+{
+    SynthVoice::Parameters parameters;
+    parameters.modRatio = m_stateManager.apvt.getRawParameterValue("MOD_RATIO")->load();
+    parameters.modLevel = m_stateManager.apvt.getRawParameterValue("MOD_LEVEL")->load();
+    parameters.modADSRParams.attack = m_stateManager.apvt.getRawParameterValue("MOD_ATTACK")->load();
+    parameters.modADSRParams.decay = m_stateManager.apvt.getRawParameterValue("MOD_DECAY")->load();
+    parameters.modADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("MOD_SUSTAIN")->load();
+    parameters.modADSRParams.release = m_stateManager.apvt.getRawParameterValue("MOD_RELEASE")->load();
+    
+    parameters.carrierWaveform = static_cast<lldsp::oscillators::Waveform>(m_stateManager.apvt.getRawParameterValue("CARRIER_WAVEFORM")->load());
+    parameters.carrierADSRParams.attack = m_stateManager.apvt.getRawParameterValue("CARRIER_ATTACK")->load();
+    parameters.carrierADSRParams.decay = m_stateManager.apvt.getRawParameterValue("CARRIER_DECAY")->load();
+    parameters.carrierADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("CARRIER_SUSTAIN")->load();
+    parameters.carrierADSRParams.release = m_stateManager.apvt.getRawParameterValue("CARRIER_RELEASE")->load();
+
+    parameters.filterCutoff = m_stateManager.apvt.getRawParameterValue("FILTER_CUTOFF")->load();
+    parameters.filterQ = m_stateManager.apvt.getRawParameterValue("FILTER_Q")->load();
+	parameters.filterADSRParams.attack = m_stateManager.apvt.getRawParameterValue("FILTER_ATTACK")->load();
+    parameters.filterADSRParams.decay = m_stateManager.apvt.getRawParameterValue("FILTER_DECAY")->load();
+    parameters.filterADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("FILTER_SUSTAIN")->load();
+    parameters.filterADSRParams.release = m_stateManager.apvt.getRawParameterValue("FILTER_RELEASE")->load();
+
+    parameters.reverbAmount = m_stateManager.apvt.getRawParameterValue("REVERB_AMOUNT")->load();
+    parameters.reverbTime = m_stateManager.apvt.getRawParameterValue("REVERB_TIME")->load();
+
+    parameters.distortionGain = m_stateManager.apvt.getRawParameterValue("DISTORTION_GAIN")->load();
+
+    for (int i = 0; i < m_synthesizer.getNumVoices(); i++)
+    {
+        // Check that myVoice is a SynthVoice*
+        if (SynthVoice* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
+            pVoice->SetParameters(parameters);
+        }
+    }
+    m_parameters = parameters;
+}
 
 void FMSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
-    m_keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
-    
-    //juce::ScopedNoDenormals noDenormals;
-    //auto totalNumInputChannels  = getTotalNumInputChannels();
-    //auto totalNumOutputChannels = getTotalNumOutputChannels();
+    UpdateVoiceParameters();
 
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    //for (auto i = 0; i < totalNumOutputChannels; ++i)
-    //    buffer.clear (i, 0, buffer.getNumSamples());
+    m_keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
 
     buffer.clear();
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-
     m_synthesizer.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
-    //for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    //{
-    //    auto* channelData = buffer.getWritePointer (channel);
-
-    //    // ..do something to the data...
-    //}
+    for (int sampleIndex = 0; sampleIndex < buffer.getNumSamples(); sampleIndex++)
+    {
+        auto* rChannelData = buffer.getWritePointer(1, 0);
+        auto* lChannelData = buffer.getWritePointer(0, 0);
+        rChannelData[sampleIndex] = m_reverb->Process(rChannelData[sampleIndex], m_parameters.reverbTime, m_parameters.reverbAmount);
+        if (m_parameters.distortionGain > 0)
+        {
+			rChannelData[sampleIndex] = lldsp::effects::TanhWaveshaper(rChannelData[sampleIndex], m_parameters.distortionGain);
+        }
+        lChannelData[sampleIndex] = rChannelData[sampleIndex];
+    }
 }
 
 //==============================================================================

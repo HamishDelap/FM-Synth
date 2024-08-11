@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "SynthVoice.h"
+#include "JStateManager.h"
 
 //==============================================================================
 /**
@@ -58,9 +59,16 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     juce::MidiKeyboardState m_keyboardState;
+    JStateManager m_stateManager;
 
 private:
+    void UpdateVoiceParameters();
+
     juce::Synthesiser m_synthesizer;
+    
+    SynthVoice::Parameters m_parameters;
+
+    std::unique_ptr<lldsp::effects::Reverb> m_reverb;
    
     juce::MidiMessageCollector m_midiMessageCollector;
 
