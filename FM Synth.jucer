@@ -2,8 +2,7 @@
 
 <JUCERPROJECT id="L9HBol" name="FM Synth" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              cppLanguageStandard="17" headerPath="C:\Users\hamis\Documents\Dev\AudioDevelopment\LetsLearnDSP\src"
-              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+              cppLanguageStandard="17" headerPath="..\..\libs\LLDSP\src" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="rd4STg" name="FM Synth">
     <GROUP id="{150C4FCA-27E3-0C80-1333-98EDF0771AE6}" name="Assets">
       <FILE id="KtXtnD" name="background.png" compile="0" resource="1" file="Assets/background.png"/>
