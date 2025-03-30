@@ -20,7 +20,7 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
     InitialiseControls();
 
     //addAndMakeVisible(m_keyboardComponent);
-    m_audioProcessor.m_keyboardState.addListener(this);
+    //m_audioProcessor.m_keyboardState.addListener(this);
     //m_keyboardComponent.setAvailableRange(0, 127);
 
 }
@@ -88,6 +88,7 @@ void FMSynthAudioProcessorEditor::InitialiseControls()
 
 FMSynthAudioProcessorEditor::~FMSynthAudioProcessorEditor()
 {
+    m_audioProcessor.m_keyboardState.removeListener(this);
     m_audioProcessor.m_keyboardState.reset();
 }
 

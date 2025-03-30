@@ -193,7 +193,7 @@ void FMSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 {
     UpdateVoiceParameters();
 
-    m_keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
+    //m_keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
 
     buffer.clear();
     m_synthesizer.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());

@@ -1,10 +1,6 @@
 #pragma once
 #include "SynthVoice.h"
 #include "SynthSound.h"
-#include <fstream>
-
-// Ensure the file is open once at the start of your application
-static std::ofstream logFile("output_log.csv");
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 {
@@ -46,7 +42,7 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
 
 void SynthVoice::pitchWheelMoved(int newPitchWheelValue)
 {
-	// Let's assume a pitch bend range of ±2 semitones for this example
+	// Let's assume a pitch bend range of Â±2 semitones for this example
 	auto pitchBendRange = 2.0f; // in semitones
 
 	// Normalize the pitch wheel value to a range of -1.0 to 1.0
@@ -110,7 +106,6 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 		double sample = m_carrier.Sample(std::abs(m_newFrequency * (modulatorOutput * m_parameters.modLevel)), 1);
 		sample = m_carrierEnvelope.Process(sample); 
 
-       
 		if (m_parameters.filterCutoff != 0)
 		{
 			m_filter.SetCutoff(m_parameters.filterCutoff, 1, m_parameters.filterQ);
