@@ -23,40 +23,40 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="pOi6ss" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <GROUP id="{7B63F793-F13B-31A0-B153-60F9997FD9B9}" name="LLDSP">
-      <FILE id="JFFKZE" name="lldsp.oscillators.h" compile="0" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.oscillators.h"/>
-      <FILE id="PV6GHK" name="lldsp.oscillators.oscillator.cpp" compile="1"
-            resource="0" file="../../LetsLearnDSP/src/lldsp.oscillators.oscillator.cpp"/>
-      <FILE id="nxmXzj" name="lldsp.oscillators.oscillator.h" compile="0"
-            resource="0" file="../../LetsLearnDSP/src/lldsp.oscillators.oscillator.h"/>
-      <FILE id="kR9VhM" name="lldsp.cpp" compile="1" resource="0" file="../../LetsLearnDSP/src/lldsp.cpp"/>
-      <FILE id="DVh8nI" name="lldsp.dsp.cpp" compile="1" resource="0" file="../../LetsLearnDSP/src/lldsp.dsp.cpp"/>
-      <FILE id="pogdtG" name="lldsp.dsp.h" compile="0" resource="0" file="../../LetsLearnDSP/src/lldsp.dsp.h"/>
-      <FILE id="Ge3tU5" name="lldsp.effects.chorus.cpp" compile="1" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.chorus.cpp"/>
-      <FILE id="y5LHDq" name="lldsp.effects.chorus.h" compile="0" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.chorus.h"/>
-      <FILE id="Vb9URv" name="lldsp.effects.distortion.cpp" compile="1" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.distortion.cpp"/>
-      <FILE id="W2ZKSv" name="lldsp.effects.distortion.h" compile="0" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.distortion.h"/>
-      <FILE id="CGRqmc" name="lldsp.effects.granular.cpp" compile="1" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.granular.cpp"/>
-      <FILE id="i69SIt" name="lldsp.effects.granular.h" compile="0" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.granular.h"/>
-      <FILE id="GtJMYl" name="lldsp.effects.h" compile="0" resource="0" file="../../LetsLearnDSP/src/lldsp.effects.h"/>
-      <FILE id="IbR44J" name="lldsp.effects.reverb.cpp" compile="1" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.reverb.cpp"/>
-      <FILE id="Ir86PA" name="lldsp.effects.reverb.h" compile="0" resource="0"
-            file="../../LetsLearnDSP/src/lldsp.effects.reverb.h"/>
-      <FILE id="qRjD5r" name="lldsp.h" compile="0" resource="0" file="../../LetsLearnDSP/src/lldsp.h"/>
-      <FILE id="maa3Ar" name="lldsp.oscillators.signalgenerator.cpp" compile="1"
-            resource="0" file="../../LetsLearnDSP/src/lldsp.oscillators.signalgenerator.cpp"/>
-      <FILE id="quOYFz" name="lldsp.oscillators.signalgenerator.h" compile="0"
-            resource="0" file="../../LetsLearnDSP/src/lldsp.oscillators.signalgenerator.h"/>
-      <FILE id="o1REFE" name="lldsp.utils.cpp" compile="1" resource="0" file="../../LetsLearnDSP/src/lldsp.utils.cpp"/>
-      <FILE id="cg3Sef" name="lldsp.utils.h" compile="0" resource="0" file="../../LetsLearnDSP/src/lldsp.utils.h"/>
+    <GROUP id="{3787D15A-4567-7111-B56D-4EC0AE0ACF7C}" name="LLDSP">
+      <FILE id="D7bBV5" name="lldsp.cpp" compile="1" resource="0" file="libs/LLDSP/src/lldsp.cpp"/>
+      <FILE id="eQ9qwG" name="lldsp.dsp.cpp" compile="1" resource="0" file="libs/LLDSP/src/lldsp.dsp.cpp"/>
+      <FILE id="WZRema" name="lldsp.dsp.h" compile="0" resource="0" file="libs/LLDSP/src/lldsp.dsp.h"/>
+      <FILE id="oNn4w0" name="lldsp.effects.chorus.cpp" compile="1" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.chorus.cpp"/>
+      <FILE id="guQMhE" name="lldsp.effects.chorus.h" compile="0" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.chorus.h"/>
+      <FILE id="a8RlGr" name="lldsp.effects.distortion.cpp" compile="1" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.distortion.cpp"/>
+      <FILE id="uSHNNL" name="lldsp.effects.distortion.h" compile="0" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.distortion.h"/>
+      <FILE id="mASRtl" name="lldsp.effects.granular.cpp" compile="1" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.granular.cpp"/>
+      <FILE id="nW0LVc" name="lldsp.effects.granular.h" compile="0" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.granular.h"/>
+      <FILE id="i14Jx8" name="lldsp.effects.h" compile="0" resource="0" file="libs/LLDSP/src/lldsp.effects.h"/>
+      <FILE id="Dz1qoM" name="lldsp.effects.reverb.cpp" compile="1" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.reverb.cpp"/>
+      <FILE id="qy3xSG" name="lldsp.effects.reverb.h" compile="0" resource="0"
+            file="libs/LLDSP/src/lldsp.effects.reverb.h"/>
+      <FILE id="XWEHTo" name="lldsp.h" compile="0" resource="0" file="libs/LLDSP/src/lldsp.h"/>
+      <FILE id="y989Rw" name="lldsp.oscillators.h" compile="0" resource="0"
+            file="libs/LLDSP/src/lldsp.oscillators.h"/>
+      <FILE id="ekJGgQ" name="lldsp.oscillators.oscillator.cpp" compile="1"
+            resource="0" file="libs/LLDSP/src/lldsp.oscillators.oscillator.cpp"/>
+      <FILE id="rkVYO4" name="lldsp.oscillators.oscillator.h" compile="0"
+            resource="0" file="libs/LLDSP/src/lldsp.oscillators.oscillator.h"/>
+      <FILE id="vrSoUe" name="lldsp.oscillators.signalgenerator.cpp" compile="1"
+            resource="0" file="libs/LLDSP/src/lldsp.oscillators.signalgenerator.cpp"/>
+      <FILE id="QtnYGN" name="lldsp.oscillators.signalgenerator.h" compile="0"
+            resource="0" file="libs/LLDSP/src/lldsp.oscillators.signalgenerator.h"/>
+      <FILE id="cPBhUa" name="lldsp.utils.cpp" compile="1" resource="0" file="libs/LLDSP/src/lldsp.utils.cpp"/>
+      <FILE id="sFwGFS" name="lldsp.utils.h" compile="0" resource="0" file="libs/LLDSP/src/lldsp.utils.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>

@@ -1,0 +1,3 @@
+[submodule "libs/LLDSP"]
+	path = libs/LLDSP
+	url = https://github.com/HamishDelap/LetsLearnDSP.git
