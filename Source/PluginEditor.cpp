@@ -31,6 +31,7 @@ void FMSynthAudioProcessorEditor::InitialiseControls()
         pThis->addAndMakeVisible(slider);
         slider.addListener(pThis);
         slider.setSliderStyle(juce::Slider::Rotary);
+        slider.setLookAndFeel(&pThis->m_knobLookAndFeel);
         slider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         attachment = new juce::AudioProcessorValueTreeState::SliderAttachment(pThis->m_audioProcessor.m_stateManager.apvt, paramId, slider);
     };

@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "KnobLookAndFeel.h"
 
 //==============================================================================
 /**
@@ -39,6 +40,7 @@ private:
     FMSynthAudioProcessor& m_audioProcessor;
 
     // Controls
+    KnobLookAndFeel m_knobLookAndFeel;
     //  Modulator
     juce::Label m_modRatioLabel;
     juce::Slider m_modRatioKnob;

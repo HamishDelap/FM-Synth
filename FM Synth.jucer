@@ -10,6 +10,10 @@
             file="Assets/backgroundv2wgrunge.png"/>
     </GROUP>
     <GROUP id="{AA71D200-8088-7778-4781-35418D43852C}" name="Source">
+      <FILE id="m5hAQZ" name="KnobLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/KnobLookAndFeel.cpp"/>
+      <FILE id="cRyg39" name="KnobLookAndFeel.h" compile="0" resource="0"
+            file="Source/KnobLookAndFeel.h"/>
       <FILE id="TUety0" name="JStateManager.cpp" compile="1" resource="0"
             file="Source/JStateManager.cpp"/>
       <FILE id="aCJ2Yc" name="JStateManager.h" compile="0" resource="0" file="Source/JStateManager.h"/>
