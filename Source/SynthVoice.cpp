@@ -108,8 +108,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 
 		if (m_parameters.filterCutoff != 0)
 		{
-			m_filter.SetCutoff(m_parameters.filterCutoff, 1, m_parameters.filterQ);
-			//m_filter.SetCutoff(m_filterEnvelope.Process(m_parameters.filterCutoff), 1, m_parameters.filterQ);
+			m_filter.SetCutoff(m_filterEnvelope.Process(m_parameters.filterCutoff), m_parameters.filterQ, 1);
 			sample = m_filter.Process(sample);
 		}
 

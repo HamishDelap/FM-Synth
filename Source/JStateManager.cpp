@@ -82,7 +82,7 @@ AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout(
         params.add(std::make_unique<AudioParameterFloat>("CARRIER_RELEASE", "Carrier Release", 0, 10, 0.5));
 
         // Filter
-        params.add(std::make_unique<AudioParameterFloat>("FILTER_CUTOFF", "Filter Cutoff", 0, 20000, 3000));
+        params.add(std::make_unique<AudioParameterFloat>("FILTER_CUTOFF", "Filter Cutoff", 10, 20000, 3000));
         params.add(std::make_unique<AudioParameterFloat>("FILTER_Q", "Filter Q", -30, 30, 0));
         params.add(std::make_unique<AudioParameterFloat>("FILTER_ATTACK", "Filter Attack", 0, 10, 0.5));
         params.add(std::make_unique<AudioParameterFloat>("FILTER_DECAY", "Filter Decay", 0, 10, 0.2));
