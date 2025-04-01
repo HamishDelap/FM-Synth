@@ -110,7 +110,7 @@ void FMSynthAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    juce::Image background = juce::ImageCache::getFromMemory(BinaryData::background_png, BinaryData::background_pngSize);
+    juce::Image background = juce::ImageCache::getFromMemory(BinaryData::backgroundv2wgrunge_png, BinaryData::backgroundv2wgrunge_pngSize);
     g.drawImageAt(background, 0, 0);
 }
 

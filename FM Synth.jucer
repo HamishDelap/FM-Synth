@@ -6,6 +6,8 @@
   <MAINGROUP id="rd4STg" name="FM Synth">
     <GROUP id="{150C4FCA-27E3-0C80-1333-98EDF0771AE6}" name="Assets">
       <FILE id="KtXtnD" name="background.png" compile="0" resource="1" file="Assets/background.png"/>
+      <FILE id="XXhsss" name="backgroundv2wgrunge.png" compile="0" resource="1"
+            file="Assets/backgroundv2wgrunge.png"/>
     </GROUP>
     <GROUP id="{AA71D200-8088-7778-4781-35418D43852C}" name="Source">
       <FILE id="TUety0" name="JStateManager.cpp" compile="1" resource="0"
