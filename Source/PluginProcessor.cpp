@@ -153,40 +153,38 @@ bool FMSynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
     
 void FMSynthAudioProcessor::UpdateVoiceParameters()
 {
-    SynthVoice::Parameters parameters;
-    parameters.modRatio = m_stateManager.apvt.getRawParameterValue("MOD_RATIO")->load();
-    parameters.modLevel = m_stateManager.apvt.getRawParameterValue("MOD_LEVEL")->load();
-    parameters.modADSRParams.attack = m_stateManager.apvt.getRawParameterValue("MOD_ATTACK")->load();
-    parameters.modADSRParams.decay = m_stateManager.apvt.getRawParameterValue("MOD_DECAY")->load();
-    parameters.modADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("MOD_SUSTAIN")->load();
-    parameters.modADSRParams.release = m_stateManager.apvt.getRawParameterValue("MOD_RELEASE")->load();
+    m_parameters.modRatio = m_stateManager.apvt.getRawParameterValue("MOD_RATIO")->load();
+    m_parameters.modLevel = m_stateManager.apvt.getRawParameterValue("MOD_LEVEL")->load();
+    m_parameters.modADSRParams.attack = m_stateManager.apvt.getRawParameterValue("MOD_ATTACK")->load();
+    m_parameters.modADSRParams.decay = m_stateManager.apvt.getRawParameterValue("MOD_DECAY")->load();
+    m_parameters.modADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("MOD_SUSTAIN")->load();
+    m_parameters.modADSRParams.release = m_stateManager.apvt.getRawParameterValue("MOD_RELEASE")->load();
     
-    parameters.carrierWaveform = static_cast<lldsp::oscillators::Waveform>(m_stateManager.apvt.getRawParameterValue("CARRIER_WAVEFORM")->load());
-    parameters.carrierADSRParams.attack = m_stateManager.apvt.getRawParameterValue("CARRIER_ATTACK")->load();
-    parameters.carrierADSRParams.decay = m_stateManager.apvt.getRawParameterValue("CARRIER_DECAY")->load();
-    parameters.carrierADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("CARRIER_SUSTAIN")->load();
-    parameters.carrierADSRParams.release = m_stateManager.apvt.getRawParameterValue("CARRIER_RELEASE")->load();
+    m_parameters.carrierWaveform = static_cast<lldsp::oscillators::Waveform>(m_stateManager.apvt.getRawParameterValue("CARRIER_WAVEFORM")->load());
+    m_parameters.carrierADSRParams.attack = m_stateManager.apvt.getRawParameterValue("CARRIER_ATTACK")->load();
+    m_parameters.carrierADSRParams.decay = m_stateManager.apvt.getRawParameterValue("CARRIER_DECAY")->load();
+    m_parameters.carrierADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("CARRIER_SUSTAIN")->load();
+    m_parameters.carrierADSRParams.release = m_stateManager.apvt.getRawParameterValue("CARRIER_RELEASE")->load();
 
-    parameters.filterCutoff = m_stateManager.apvt.getRawParameterValue("FILTER_CUTOFF")->load();
-    parameters.filterQ = m_stateManager.apvt.getRawParameterValue("FILTER_Q")->load();
-	parameters.filterADSRParams.attack = m_stateManager.apvt.getRawParameterValue("FILTER_ATTACK")->load();
-    parameters.filterADSRParams.decay = m_stateManager.apvt.getRawParameterValue("FILTER_DECAY")->load();
-    parameters.filterADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("FILTER_SUSTAIN")->load();
-    parameters.filterADSRParams.release = m_stateManager.apvt.getRawParameterValue("FILTER_RELEASE")->load();
+    m_parameters.filterCutoff = m_stateManager.apvt.getRawParameterValue("FILTER_CUTOFF")->load();
+    m_parameters.filterQ = m_stateManager.apvt.getRawParameterValue("FILTER_Q")->load();
+	m_parameters.filterADSRParams.attack = m_stateManager.apvt.getRawParameterValue("FILTER_ATTACK")->load();
+    m_parameters.filterADSRParams.decay = m_stateManager.apvt.getRawParameterValue("FILTER_DECAY")->load();
+    m_parameters.filterADSRParams.sustain = m_stateManager.apvt.getRawParameterValue("FILTER_SUSTAIN")->load();
+    m_parameters.filterADSRParams.release = m_stateManager.apvt.getRawParameterValue("FILTER_RELEASE")->load();
 
-    parameters.reverbAmount = m_stateManager.apvt.getRawParameterValue("REVERB_AMOUNT")->load();
-    parameters.reverbTime = m_stateManager.apvt.getRawParameterValue("REVERB_TIME")->load();
+    m_parameters.reverbAmount = m_stateManager.apvt.getRawParameterValue("REVERB_AMOUNT")->load();
+    m_parameters.reverbTime = m_stateManager.apvt.getRawParameterValue("REVERB_TIME")->load();
 
-    parameters.distortionGain = m_stateManager.apvt.getRawParameterValue("DISTORTION_GAIN")->load();
+    m_parameters.distortionGain = m_stateManager.apvt.getRawParameterValue("DISTORTION_GAIN")->load();
 
     for (int i = 0; i < m_synthesizer.getNumVoices(); i++)
     {
         // Check that myVoice is a SynthVoice*
         if (SynthVoice* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
-            pVoice->SetParameters(parameters);
+            pVoice->SetParameters(m_parameters);
         }
     }
-    m_parameters = parameters;
 }
 
 void FMSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)

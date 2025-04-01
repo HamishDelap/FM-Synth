@@ -85,10 +85,10 @@ void SynthVoice::SetSampleRate(const double sampleRate)
 
 	m_filter.SetSampleRate(sampleRate);
 }
-    
+
 void SynthVoice::SetParameters(const Parameters& parameters)
 {
-	m_parameters = std::move(parameters);
+	m_parameters = parameters;
 	m_modulatorEnvelope.SetParameters(m_parameters.modADSRParams);
 	m_carrierEnvelope.SetParameters(m_parameters.carrierADSRParams);
 	m_filterEnvelope.SetParameters(m_parameters.filterADSRParams);
