@@ -18,7 +18,8 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
     setSize (1356,  516);
     
     InitialiseControls();
-
+ 
+    m_keyboardState.addListener(this);
     //addAndMakeVisible(m_keyboardComponent);
     //m_audioProcessor.m_keyboardState.addListener(this);
     //m_keyboardComponent.setAvailableRange(0, 127);
@@ -27,13 +28,13 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
     
 void FMSynthAudioProcessorEditor::InitialiseControls()
 {
-    auto InitSlider = [pThis = this](juce::Slider& slider, juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment>& attachment, const std::string& paramId) {
+    auto InitSlider = [pThis = this](juce::Slider& slider, std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>& attachment, const std::string& paramId) {
         pThis->addAndMakeVisible(slider);
         slider.addListener(pThis);
         slider.setSliderStyle(juce::Slider::Rotary);
         slider.setLookAndFeel(&pThis->m_knobLookAndFeel);
         slider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-        attachment = new juce::AudioProcessorValueTreeState::SliderAttachment(pThis->m_audioProcessor.m_stateManager.apvt, paramId, slider);
+        attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(pThis->m_audioProcessor.m_stateManager.apvt, paramId, slider);
     };
 
     //  Modulator
@@ -68,7 +69,7 @@ void FMSynthAudioProcessorEditor::InitialiseControls()
     m_carrierWaveformMenu.addItem("Square", 3);
     m_carrierWaveformMenu.addItem("Saw", 4);
     m_carrierWaveformMenu.setSelectedId(1);
-    m_carrierWaveformMenuAttachment = new AudioProcessorValueTreeState::ComboBoxAttachment(m_audioProcessor.m_stateManager.apvt, "CARRIER_WAVEFORM", m_carrierWaveformMenu);
+    m_carrierWaveformMenuAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(m_audioProcessor.m_stateManager.apvt, "CARRIER_WAVEFORM", m_carrierWaveformMenu);
 
     addAndMakeVisible(m_filterCutoffLabel);
     m_filterCutoffLabel.setFont(juce::Font(24.0f, juce::Font::plain));
