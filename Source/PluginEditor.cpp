@@ -28,6 +28,17 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
 	juce::Image nextNormal = juce::ImageCache::getFromMemory(BinaryData::NextDefault_png, BinaryData::NextDefault_pngSize);
 	juce::Image nextOver = juce::ImageCache::getFromMemory(BinaryData::NextHover_png, BinaryData::NextHover_pngSize);
 	juce::Image nextPressed = juce::ImageCache::getFromMemory(BinaryData::NextPressed_png, BinaryData::NextPressed_pngSize);
+    
+    m_operatorPanelIndicator.setImage(juce::ImageCache::getFromMemory(BinaryData::OperatorPanelIndicator_png, BinaryData::OperatorPanelIndicator_pngSize));
+    m_filterPanelIndicator.setImage(juce::ImageCache::getFromMemory(BinaryData::FilterPanelIndicator_png, BinaryData::FilterPanelIndicator_pngSize));
+    m_effectsPanelIndicator.setImage(juce::ImageCache::getFromMemory(BinaryData::EffectsPanelIndicator_png, BinaryData::EffectsPanelIndicator_pngSize));
+    
+    addAndMakeVisible(m_operatorPanelIndicator);
+    addAndMakeVisible(m_filterPanelIndicator);
+    addAndMakeVisible(m_effectsPanelIndicator);
+    m_filterPanelIndicator.setVisible(false);
+    m_effectsPanelIndicator.setVisible(false);
+
 
     m_nextBtn.setImages(true, true, true,
         nextNormal, 1.0f, transparent,
@@ -100,6 +111,10 @@ void FMSynthAudioProcessorEditor::resized()
     m_operatorPanel.setBounds(57, 72, 401, 371);
 	m_filterPanel.setBounds(57, 72, 401, 371);
 	m_effectsPanel.setBounds(57, 72, 401, 371);
+    
+    m_operatorPanelIndicator.setBounds(208, 48, 100, 30);
+	m_filterPanelIndicator.setBounds(208, 48, 100, 30);
+	m_effectsPanelIndicator.setBounds(208, 48, 100, 30);
 }
 
 void FMSynthAudioProcessorEditor::UpdatePanel()
@@ -109,22 +124,31 @@ void FMSynthAudioProcessorEditor::UpdatePanel()
     case Panel::Operators:
     {
         m_operatorPanel.setVisible(true);
+        m_operatorPanelIndicator.setVisible(true);
         m_filterPanel.setVisible(false);
+        m_filterPanelIndicator.setVisible(false);
         m_effectsPanel.setVisible(false);
+        m_effectsPanelIndicator.setVisible(false);
         break;
     }
     case Panel::Filter:
     {
         m_operatorPanel.setVisible(false);
+        m_operatorPanelIndicator.setVisible(false);
         m_filterPanel.setVisible(true);
+        m_filterPanelIndicator.setVisible(true);
         m_effectsPanel.setVisible(false);
+        m_effectsPanelIndicator.setVisible(false);
         break;
     }
     case Panel::Effects:
     {
         m_operatorPanel.setVisible(false);
+        m_operatorPanelIndicator.setVisible(false);
         m_filterPanel.setVisible(false);
+        m_filterPanelIndicator.setVisible(false);
         m_effectsPanel.setVisible(true);
+        m_effectsPanelIndicator.setVisible(true);
         break;
     }
     }

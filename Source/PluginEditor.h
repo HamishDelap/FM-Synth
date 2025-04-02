@@ -44,6 +44,10 @@ private:
     };
     Panel m_currentPanel = Panel::Operators;
 
+    juce::ImageComponent m_operatorPanelIndicator;
+    juce::ImageComponent m_filterPanelIndicator;
+    juce::ImageComponent m_effectsPanelIndicator;
+
     juce::ImageButton m_nextBtn;
     juce::ImageButton m_prevBtn;
     

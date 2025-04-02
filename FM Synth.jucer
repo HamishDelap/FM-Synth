@@ -10,10 +10,16 @@
             file="Assets/backgroundv2wgrunge.png"/>
       <FILE id="Q4s2Ri" name="EffectsPanel.png" compile="0" resource="1"
             file="Assets/EffectsPanel.png"/>
+      <FILE id="aEuKFW" name="EffectsPanelIndicator.png" compile="0" resource="1"
+            file="Assets/Panel Indicator/EffectsPanelIndicator.png"/>
       <FILE id="Wh3Kjm" name="FilterPanel.png" compile="0" resource="1" file="Assets/FilterPanel.png"/>
+      <FILE id="TLzuTQ" name="FilterPanelIndicator.png" compile="0" resource="1"
+            file="Assets/Panel Indicator/FilterPanelIndicator.png"/>
       <FILE id="dYT937" name="NextDefault.png" compile="0" resource="1" file="Assets/Buttons/NextDefault.png"/>
       <FILE id="tGo78h" name="NextHover.png" compile="0" resource="1" file="Assets/Buttons/NextHover.png"/>
       <FILE id="K2IGJM" name="NextPressed.png" compile="0" resource="1" file="Assets/Buttons/NextPressed.png"/>
+      <FILE id="SR1vFm" name="OperatorPanelIndicator.png" compile="0" resource="1"
+            file="Assets/Panel Indicator/OperatorPanelIndicator.png"/>
       <FILE id="frLi2w" name="OperatorsPanel.png" compile="0" resource="1"
             file="Assets/OperatorsPanel.png"/>
       <FILE id="sPLLDT" name="PrevDefault.png" compile="0" resource="1" file="Assets/Buttons/PrevDefault.png"/>
