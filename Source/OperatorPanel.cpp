@@ -46,6 +46,8 @@ OperatorPanelComponent::OperatorPanelComponent(FMSynthAudioProcessor& p)
     m_carrierWaveformMenu.setSelectedId(1);
     m_carrierWaveformMenuAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(m_audioProcessor.m_stateManager.apvt, "CARRIER_WAVEFORM", m_carrierWaveformMenu);
 
+    m_carrierWaveformMenu.setLookAndFeel(&m_knobLookAndFeel);
+
     InitSlider(m_attackKnob, m_pAttackKnobAttachment, "CARRIER_ATTACK");
     InitSlider(m_decayKnob, m_pDecayKnobAttachment, "CARRIER_DECAY");
     InitSlider(m_sustainKnob, m_pSustainKnobAttachment, "CARRIER_SUSTAIN");

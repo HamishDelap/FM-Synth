@@ -13,8 +13,6 @@
 FilterPanelComponent::FilterPanelComponent(FMSynthAudioProcessor& p)
     : m_audioProcessor(p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
     setSize(401, 371);
 
     auto InitSlider = [pThis = this](juce::Slider& slider, std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>& attachment, const std::string& paramId) {

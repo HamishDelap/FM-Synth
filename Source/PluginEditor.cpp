@@ -24,8 +24,16 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
     m_filterPanel.setVisible(false);
     m_effectsPanel.setVisible(false);
 
-    m_nextBtn.setButtonText("Next");
+    juce::Colour transparent = juce::Colour::fromRGBA(0, 0, 0, 0);
+	juce::Image nextNormal = juce::ImageCache::getFromMemory(BinaryData::NextDefault_png, BinaryData::NextDefault_pngSize);
+	juce::Image nextOver = juce::ImageCache::getFromMemory(BinaryData::NextHover_png, BinaryData::NextHover_pngSize);
+	juce::Image nextPressed = juce::ImageCache::getFromMemory(BinaryData::NextPressed_png, BinaryData::NextPressed_pngSize);
 
+    m_nextBtn.setImages(true, true, true,
+        nextNormal, 1.0f, transparent,
+        nextOver, 1.0f, transparent,
+        nextPressed, 1.0f, transparent);
+    
     m_nextBtn.onClick = [&]() {
         m_currentPanel = (int)m_currentPanel == 2 ? Panel::Operators : (Panel)((int)m_currentPanel + 1);
         UpdatePanel();
@@ -33,7 +41,14 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
 
     addAndMakeVisible(m_nextBtn);
 
-    m_prevBtn.setButtonText("Prev");
+	juce::Image prevNormal = juce::ImageCache::getFromMemory(BinaryData::PrevDefault_png, BinaryData::PrevDefault_pngSize);
+	juce::Image prevOver = juce::ImageCache::getFromMemory(BinaryData::PrevHover_png, BinaryData::PrevHover_pngSize);
+	juce::Image prevPressed = juce::ImageCache::getFromMemory(BinaryData::PrevPressed_png, BinaryData::PrevPressed_pngSize);
+
+    m_prevBtn.setImages(true, true, true,
+        prevNormal, 1.0f, transparent,
+        prevOver, 1.0f, transparent,
+        prevPressed, 1.0f, transparent);
 
     m_prevBtn.onClick = [&]() {
         m_currentPanel = (int)m_currentPanel == 0 ? Panel::Effects : (Panel)((int)m_currentPanel - 1);
@@ -79,8 +94,8 @@ void FMSynthAudioProcessorEditor::paint (juce::Graphics& g)
 
 void FMSynthAudioProcessorEditor::resized()
 {
-    m_prevBtn.setBounds(170 - 20, 30, 40, 20);
-    m_nextBtn.setBounds(346 - 20, 30, 40, 20);
+    m_prevBtn.setBounds(170 - 10, 30, 40, 20);
+    m_nextBtn.setBounds(346 - 10, 30, 40, 20);
 
     m_operatorPanel.setBounds(57, 72, 401, 371);
 	m_filterPanel.setBounds(57, 72, 401, 371);

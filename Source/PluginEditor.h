@@ -34,6 +34,8 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     FMSynthAudioProcessor& m_audioProcessor;
+    
+    KnobLookAndFeel m_lookAndFeel;
 
     enum class Panel {
         Operators = 0,
@@ -42,8 +44,8 @@ private:
     };
     Panel m_currentPanel = Panel::Operators;
 
-    juce::TextButton m_nextBtn;
-    juce::TextButton m_prevBtn;
+    juce::ImageButton m_nextBtn;
+    juce::ImageButton m_prevBtn;
     
     // Panels 
     OperatorPanelComponent m_operatorPanel;
