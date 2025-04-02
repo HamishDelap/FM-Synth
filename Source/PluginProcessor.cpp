@@ -111,6 +111,8 @@ void FMSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     // Effects
 	m_reverb = std::make_unique<lldsp::effects::Reverb>(sampleRate);
 
+    juce::ignoreUnused(sampleRate, samplesPerBlock);
+
     for (int i = 0; i < m_synthesizer.getNumVoices(); i++) {
         // Check that myVoice is a SynthVoice*
         if (SynthVoice* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
@@ -190,8 +192,6 @@ void FMSynthAudioProcessor::UpdateVoiceParameters()
 void FMSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     UpdateVoiceParameters();
-
-    //m_keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
 
     buffer.clear();
     m_synthesizer.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
