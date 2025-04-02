@@ -8,8 +8,21 @@
       <FILE id="KtXtnD" name="background.png" compile="0" resource="1" file="Assets/background.png"/>
       <FILE id="XXhsss" name="backgroundv2wgrunge.png" compile="0" resource="1"
             file="Assets/backgroundv2wgrunge.png"/>
+      <FILE id="Q4s2Ri" name="EffectsPanel.png" compile="0" resource="1"
+            file="Assets/EffectsPanel.png"/>
+      <FILE id="Wh3Kjm" name="FilterPanel.png" compile="0" resource="1" file="Assets/FilterPanel.png"/>
+      <FILE id="frLi2w" name="OperatorsPanel.png" compile="0" resource="1"
+            file="Assets/OperatorsPanel.png"/>
     </GROUP>
     <GROUP id="{AA71D200-8088-7778-4781-35418D43852C}" name="Source">
+      <FILE id="RgpLfz" name="EffectsPanel.cpp" compile="1" resource="0"
+            file="Source/EffectsPanel.cpp"/>
+      <FILE id="WHl8lJ" name="EffectsPanel.h" compile="0" resource="0" file="Source/EffectsPanel.h"/>
+      <FILE id="LooY3b" name="FilterPanel.cpp" compile="1" resource="0" file="Source/FilterPanel.cpp"/>
+      <FILE id="t1VxxB" name="FilterPanel.h" compile="0" resource="0" file="Source/FilterPanel.h"/>
+      <FILE id="hboSlh" name="OperatorPanel.cpp" compile="1" resource="0"
+            file="Source/OperatorPanel.cpp"/>
+      <FILE id="eBwe4Q" name="OperatorPanel.h" compile="0" resource="0" file="Source/OperatorPanel.h"/>
       <FILE id="m5hAQZ" name="KnobLookAndFeel.cpp" compile="1" resource="0"
             file="Source/KnobLookAndFeel.cpp"/>
       <FILE id="cRyg39" name="KnobLookAndFeel.h" compile="0" resource="0"

@@ -3,14 +3,14 @@
 
 void KnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
 {
-    auto fill = juce::Colours::cadetblue;// slider.findColour(juce::Slider::rotarySliderOutlineColourId);
-    auto outline = slider.findColour(juce::Slider::rotarySliderFillColourId);
+    auto fill = juce::Colour::fromRGB(34, 175, 255);
+    auto outline = juce::Colour::fromRGB(210, 206, 192);
 
     auto bounds = juce::Rectangle<int>(x, y, width, height).toFloat().reduced(10);
 
     auto radius = juce::jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
     auto toAngle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
-    auto lineW = juce::jmin(8.0f, radius * 0.5f);
+    auto lineW = juce::jmin(4.0f, radius * 0.5f);
     auto arcRadius = radius - lineW * 0.5f;
 
     juce::Path backgroundArc;
