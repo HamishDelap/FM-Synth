@@ -66,7 +66,7 @@ AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout(
         // Modulator
         NormalisableRange<float> modRatioRange(0.5f, 10.0f, 0.25f);  // 0.1f is the step increment
         params.add(std::make_unique<AudioParameterFloat>("MOD_RATIO", "Modulator Ratio", modRatioRange, 2));
-        params.add(std::make_unique<AudioParameterFloat>("MOD_LEVEL", "Modulator Level", 0, 1, 1.0));
+        params.add(std::make_unique<AudioParameterFloat>("MOD_LEVEL", "Modulator Level", 0, 100, 1.0));
 
         // NOT CURRENTLY IN USE
         params.add(std::make_unique<AudioParameterFloat>("MOD_ATTACK", "Modulator Attack", 0, 10, 0.5));

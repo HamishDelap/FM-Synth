@@ -112,9 +112,9 @@ void FMSynthAudioProcessorEditor::resized()
 	m_filterPanel.setBounds(57, 72, 401, 371);
 	m_effectsPanel.setBounds(57, 72, 401, 371);
     
-    m_operatorPanelIndicator.setBounds(208, 48, 100, 30);
-	m_filterPanelIndicator.setBounds(208, 48, 100, 30);
-	m_effectsPanelIndicator.setBounds(208, 48, 100, 30);
+    m_operatorPanelIndicator.setBounds(208, 47, 100, 30);
+	m_filterPanelIndicator.setBounds(208, 47, 100, 30);
+	m_effectsPanelIndicator.setBounds(208, 47, 100, 30);
 }
 
 void FMSynthAudioProcessorEditor::UpdatePanel()

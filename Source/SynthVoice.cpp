@@ -102,7 +102,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 	for (int sampleIndex = 0; sampleIndex < numSamples; sampleIndex++)
 	{
 		double modulatorOutput = m_modulator.Sample((m_newFrequency / m_parameters.modRatio), 1);
-		double modulatedFrequency = m_newFrequency + (modulatorOutput * m_parameters.modLevel * m_newFrequency);
+		double modulatedFrequency = m_newFrequency + (m_parameters.modLevel * modulatorOutput);
 		double sample = m_carrier.Sample(std::abs(modulatedFrequency), 1);
 		sample = m_carrierEnvelope.Process(sample); 
 
