@@ -189,7 +189,7 @@ void FMSynthAudioProcessor::UpdateVoiceParameters()
     }
 }
 
-void FMSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     UpdateVoiceParameters();
 

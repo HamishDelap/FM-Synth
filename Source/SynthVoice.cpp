@@ -95,7 +95,7 @@ void SynthVoice::SetParameters(const Parameters& parameters)
 	m_carrier.SetWaveForm(m_parameters.carrierWaveform);
 	m_modulator.SetWaveForm(m_parameters.carrierWaveform);
 }
-
+   
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
 	// During processing
