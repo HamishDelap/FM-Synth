@@ -76,7 +76,7 @@ AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout(
         
         // Carrier
         params.add(std::make_unique<AudioParameterInt>("CARRIER_WAVEFORM", "Carrier Waveform", 1, 4, 4));
-        params.add(std::make_unique<AudioParameterFloat>("CARRIER_ATTACK", "Carrier Attack", 0, 10, 0.25));
+        params.add(std::make_unique<AudioParameterFloat>("CARRIER_ATTACK", "Carrier Attack", 0.01, 10, 0.25));
         params.add(std::make_unique<AudioParameterFloat>("CARRIER_DECAY", "Carrier Decay", 0, 10, 0.2));
         params.add(std::make_unique<AudioParameterFloat>("CARRIER_SUSTAIN", "Carrier Sustain", 0, 10, 1));
         params.add(std::make_unique<AudioParameterFloat>("CARRIER_RELEASE", "Carrier Release", 0, 10, 0.5));
@@ -84,7 +84,7 @@ AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout(
         // Filter
         params.add(std::make_unique<AudioParameterFloat>("FILTER_CUTOFF", "Filter Cutoff", 10, 20000, 3000));
         params.add(std::make_unique<AudioParameterFloat>("FILTER_Q", "Filter Q", 0.5, 1.5, 0));
-        params.add(std::make_unique<AudioParameterFloat>("FILTER_ATTACK", "Filter Attack", 0, 10, 0.5));
+        params.add(std::make_unique<AudioParameterFloat>("FILTER_ATTACK", "Filter Attack", 0.01, 10, 0.5));
         params.add(std::make_unique<AudioParameterFloat>("FILTER_DECAY", "Filter Decay", 0, 10, 0.2));
         params.add(std::make_unique<AudioParameterFloat>("FILTER_SUSTAIN", "Filter Sustain", 0, 1, 0.8));
         params.add(std::make_unique<AudioParameterFloat>("FILTER_RELEASE", "Filter Release", 0, 10, 0.5));

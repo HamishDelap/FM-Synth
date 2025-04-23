@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "SynthVoice.h"
 #include "JStateManager.h"
+#include "WaveformProcessor.h"
 
 //==============================================================================
 /**
@@ -58,19 +59,21 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    bool GetWaveformVisualisationBuffer(juce::AudioBuffer<float>& outBuffer);
+
     juce::MidiKeyboardState m_keyboardState;
     JStateManager m_stateManager;
 
 private:
     void UpdateVoiceParameters();
 
+    juce::MidiMessageCollector m_midiMessageCollector;
     juce::Synthesiser m_synthesizer;
-    
     SynthVoice::Parameters m_parameters;
 
     std::unique_ptr<lldsp::effects::Reverb> m_reverb;
+    std::unique_ptr<WaveformProcessor> m_pWaveformProcessor;
    
-    juce::MidiMessageCollector m_midiMessageCollector;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FMSynthAudioProcessor)

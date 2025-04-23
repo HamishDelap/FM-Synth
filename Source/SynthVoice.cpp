@@ -95,10 +95,10 @@ void SynthVoice::SetParameters(const Parameters& parameters)
 	m_carrier.SetWaveForm(m_parameters.carrierWaveform);
 	m_modulator.SetWaveForm(m_parameters.carrierWaveform);
 }
-   
+
+// DANGER: Currently assuming processor is mono so will copy left channel to right.
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
-	// During processing
 	for (int sampleIndex = 0; sampleIndex < numSamples; sampleIndex++)
 	{
 		double modulatorOutput = m_modulator.Sample((m_newFrequency / m_parameters.modRatio), 1);

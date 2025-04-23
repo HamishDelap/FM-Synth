@@ -14,6 +14,7 @@
 #include "OperatorPanel.h"
 #include "FilterPanel.h"
 #include "EffectsPanel.h"
+#include "WaveformPanel.h"
 
 //==============================================================================
 /**
@@ -40,13 +41,15 @@ private:
     enum class Panel {
         Operators = 0,
         Filter    = 1,
-        Effects   = 2
+        Effects   = 2,
+        Waveform  = 3
     };
     Panel m_currentPanel = Panel::Operators;
 
     juce::ImageComponent m_operatorPanelIndicator;
     juce::ImageComponent m_filterPanelIndicator;
     juce::ImageComponent m_effectsPanelIndicator;
+    juce::ImageComponent m_waveformPanelIndicator;
 
     juce::ImageButton m_nextBtn;
     juce::ImageButton m_prevBtn;
@@ -55,6 +58,7 @@ private:
     OperatorPanelComponent m_operatorPanel;
     FilterPanelComponent m_filterPanel;
     EffectsPanelComponent m_effectsPanel;
+    WaveformPanelComponent m_waveformPanel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FMSynthAudioProcessorEditor)
 };

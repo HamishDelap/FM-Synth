@@ -12,7 +12,7 @@
 //==============================================================================
 FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor& p)
     : AudioProcessorEditor (&p), m_audioProcessor (p),
-    m_operatorPanel(p), m_filterPanel(p), m_effectsPanel(p)
+    m_operatorPanel(p), m_filterPanel(p), m_effectsPanel(p), m_waveformPanel(p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -21,8 +21,10 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
     addAndMakeVisible(m_operatorPanel);
     addAndMakeVisible(m_filterPanel);
     addAndMakeVisible(m_effectsPanel);
+    addAndMakeVisible(m_waveformPanel);
     m_filterPanel.setVisible(false);
     m_effectsPanel.setVisible(false);
+    m_waveformPanel.setVisible(false);
 
     juce::Colour transparent = juce::Colour::fromRGBA(0, 0, 0, 0);
 	juce::Image nextNormal = juce::ImageCache::getFromMemory(BinaryData::NextDefault_png, BinaryData::NextDefault_pngSize);
@@ -32,13 +34,15 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
     m_operatorPanelIndicator.setImage(juce::ImageCache::getFromMemory(BinaryData::OperatorPanelIndicator_png, BinaryData::OperatorPanelIndicator_pngSize));
     m_filterPanelIndicator.setImage(juce::ImageCache::getFromMemory(BinaryData::FilterPanelIndicator_png, BinaryData::FilterPanelIndicator_pngSize));
     m_effectsPanelIndicator.setImage(juce::ImageCache::getFromMemory(BinaryData::EffectsPanelIndicator_png, BinaryData::EffectsPanelIndicator_pngSize));
+    m_waveformPanelIndicator.setImage(juce::ImageCache::getFromMemory(BinaryData::WaveformPanelIndicator_png, BinaryData::WaveformPanelIndicator_pngSize));
     
     addAndMakeVisible(m_operatorPanelIndicator);
     addAndMakeVisible(m_filterPanelIndicator);
     addAndMakeVisible(m_effectsPanelIndicator);
+    addAndMakeVisible(m_waveformPanelIndicator);
     m_filterPanelIndicator.setVisible(false);
     m_effectsPanelIndicator.setVisible(false);
-
+    m_waveformPanelIndicator.setVisible(false);
 
     m_nextBtn.setImages(true, true, true,
         nextNormal, 1.0f, transparent,
@@ -46,7 +50,7 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
         nextPressed, 1.0f, transparent);
     
     m_nextBtn.onClick = [&]() {
-        m_currentPanel = (int)m_currentPanel == 2 ? Panel::Operators : (Panel)((int)m_currentPanel + 1);
+        m_currentPanel = (int)m_currentPanel == 3 ? Panel::Operators : (Panel)((int)m_currentPanel + 1);
         UpdatePanel();
     };
 
@@ -62,7 +66,7 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
         prevPressed, 1.0f, transparent);
 
     m_prevBtn.onClick = [&]() {
-        m_currentPanel = (int)m_currentPanel == 0 ? Panel::Effects : (Panel)((int)m_currentPanel - 1);
+        m_currentPanel = (int)m_currentPanel == 0 ? Panel::Waveform : (Panel)((int)m_currentPanel - 1);
         UpdatePanel();
     };
 
@@ -100,6 +104,13 @@ void FMSynthAudioProcessorEditor::paint (juce::Graphics& g)
 		g.drawImageAt(background, 0, 0);
         break;
     }
+    case Panel::Waveform:
+    {
+		g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+		juce::Image background = juce::ImageCache::getFromMemory(BinaryData::WaveformPanel_png, BinaryData::WaveformPanel_pngSize);
+		g.drawImageAt(background, 0, 0);
+        break;
+    }
     }
 }
 
@@ -111,10 +122,12 @@ void FMSynthAudioProcessorEditor::resized()
     m_operatorPanel.setBounds(57, 72, 401, 371);
 	m_filterPanel.setBounds(57, 72, 401, 371);
 	m_effectsPanel.setBounds(57, 72, 401, 371);
+	m_waveformPanel.setBounds(57, 72, 401, 371);
     
     m_operatorPanelIndicator.setBounds(208, 47, 100, 30);
 	m_filterPanelIndicator.setBounds(208, 47, 100, 30);
 	m_effectsPanelIndicator.setBounds(208, 47, 100, 30);
+	m_waveformPanelIndicator.setBounds(208, 47, 100, 30);
 }
 
 void FMSynthAudioProcessorEditor::UpdatePanel()
@@ -129,6 +142,8 @@ void FMSynthAudioProcessorEditor::UpdatePanel()
         m_filterPanelIndicator.setVisible(false);
         m_effectsPanel.setVisible(false);
         m_effectsPanelIndicator.setVisible(false);
+        m_waveformPanel.setVisible(false);
+        m_waveformPanelIndicator.setVisible(false);
         break;
     }
     case Panel::Filter:
@@ -139,6 +154,8 @@ void FMSynthAudioProcessorEditor::UpdatePanel()
         m_filterPanelIndicator.setVisible(true);
         m_effectsPanel.setVisible(false);
         m_effectsPanelIndicator.setVisible(false);
+        m_waveformPanel.setVisible(false);
+        m_waveformPanelIndicator.setVisible(false);
         break;
     }
     case Panel::Effects:
@@ -149,6 +166,20 @@ void FMSynthAudioProcessorEditor::UpdatePanel()
         m_filterPanelIndicator.setVisible(false);
         m_effectsPanel.setVisible(true);
         m_effectsPanelIndicator.setVisible(true);
+        m_waveformPanel.setVisible(false);
+        m_waveformPanelIndicator.setVisible(false);
+        break;
+    }
+    case Panel::Waveform:
+    {
+        m_operatorPanel.setVisible(false);
+        m_operatorPanelIndicator.setVisible(false);
+        m_filterPanel.setVisible(false);
+        m_filterPanelIndicator.setVisible(false);
+        m_effectsPanel.setVisible(false);
+        m_effectsPanelIndicator.setVisible(false);
+        m_waveformPanel.setVisible(true);
+        m_waveformPanelIndicator.setVisible(true);
         break;
     }
     }

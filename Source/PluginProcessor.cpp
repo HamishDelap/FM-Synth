@@ -120,6 +120,7 @@ void FMSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
         }
     }
 
+    m_pWaveformProcessor = std::make_unique<WaveformProcessor>(sampleRate, 1, 2);
 }
 
 void FMSynthAudioProcessor::releaseResources()
@@ -207,6 +208,8 @@ void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
         }
         lChannelData[sampleIndex] = rChannelData[sampleIndex];
     }
+
+    if (m_pWaveformProcessor) { m_pWaveformProcessor->PushBuffer(buffer); }
 }
 
 //==============================================================================
@@ -233,6 +236,15 @@ void FMSynthAudioProcessor::setStateInformation (const void* data, int sizeInByt
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 }
+    
+bool FMSynthAudioProcessor::GetWaveformVisualisationBuffer(juce::AudioBuffer<float>& outBuffer)
+{
+    if (m_pWaveformProcessor)
+    {
+		return m_pWaveformProcessor->PullBuffer(outBuffer);
+    }
+    return false;
+}
 
 //==============================================================================
 // This creates new instances of the plugin..
@@ -240,3 +252,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new FMSynthAudioProcessor();
 }
+
