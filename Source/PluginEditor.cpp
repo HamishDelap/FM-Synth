@@ -12,7 +12,7 @@
 //==============================================================================
 FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor& p)
     : AudioProcessorEditor (&p), m_audioProcessor (p),
-    m_operatorPanel(p), m_filterPanel(p), m_effectsPanel(p), m_waveformPanel(p)
+    m_operatorPanel(p), m_filterPanel(p), m_effectsPanel(p), m_waveformPanel(p), m_presetBar(p.m_stateManager)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -30,6 +30,8 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
     m_panelSelector.SetButtonCallback([this](PanelSelector::Panel panel) {
         UpdatePanel(panel);
 	});
+
+    addAndMakeVisible(m_presetBar);
 }
 
 FMSynthAudioProcessorEditor::~FMSynthAudioProcessorEditor()
@@ -75,6 +77,8 @@ void FMSynthAudioProcessorEditor::paint (juce::Graphics& g)
 
 void FMSynthAudioProcessorEditor::resized()
 {
+    m_presetBar.setBounds(338, 28, 120, 22);
+
     m_panelSelector.setBounds(57, 35, 190, 38);
 
     m_operatorPanel.setBounds(57, 72, 401, 371);

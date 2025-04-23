@@ -43,11 +43,6 @@ void KnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int widt
     }
 
     auto thumbWidth = lineW * 2.0f;
-    //juce::Point<float> thumbPoint(bounds.getCentreX() + arcRadius * std::cos(toAngle - juce::MathConstants<float>::halfPi),
-    //    bounds.getCentreY() + arcRadius * std::sin(toAngle - juce::MathConstants<float>::halfPi));
-
-    //g.setColour(slider.findColour(juce::Slider::thumbColourId));
-    //g.fillEllipse(juce::Rectangle<float>(thumbWidth, thumbWidth).withCentre(thumbPoint));
 }
 
 void KnobLookAndFeel::drawComboBox(juce::Graphics& g, int width, int height, bool,

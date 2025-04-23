@@ -28,6 +28,12 @@
             resource="1" file="Assets/Panel Indicator/OperatorIndicator-Passive.png"/>
       <FILE id="frLi2w" name="OperatorsPanel.png" compile="0" resource="1"
             file="Assets/OperatorsPanel.png"/>
+      <FILE id="xcS5wr" name="SaveButton-Active.png" compile="0" resource="1"
+            file="Assets/Buttons/SaveButton-Active.png"/>
+      <FILE id="EHB3LN" name="SaveButton-Hover.png" compile="0" resource="1"
+            file="Assets/Buttons/SaveButton-Hover.png"/>
+      <FILE id="tBjTat" name="SaveButton-Passive.png" compile="0" resource="1"
+            file="Assets/Buttons/SaveButton-Passive.png"/>
       <FILE id="fYQOpO" name="WaveformIndicator-Active.png" compile="0" resource="1"
             file="Assets/Panel Indicator/WaveformIndicator-Active.png"/>
       <FILE id="LMHdbY" name="WaveformIndicator-Hover.png" compile="0" resource="1"
@@ -38,6 +44,8 @@
             file="Assets/WaveformPanel.png"/>
     </GROUP>
     <GROUP id="{AA71D200-8088-7778-4781-35418D43852C}" name="Source">
+      <FILE id="xGGUaB" name="PresetBar.cpp" compile="1" resource="0" file="Source/PresetBar.cpp"/>
+      <FILE id="TyNiww" name="PresetBar.h" compile="0" resource="0" file="Source/PresetBar.h"/>
       <FILE id="xEUkdW" name="PanelSelector.cpp" compile="1" resource="0"
             file="Source/PanelSelector.cpp"/>
       <FILE id="VRozH5" name="PanelSelector.h" compile="0" resource="0" file="Source/PanelSelector.h"/>

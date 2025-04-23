@@ -19,6 +19,7 @@ class JStateManager
 
         StringArray getPresets();
         AudioProcessorValueTreeState apvt; // Could be std::unique_pointer?
+
     private:
         static File getPresetDirectory()
 		{

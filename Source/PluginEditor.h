@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
+#include "PresetBar.h";
 #include "PanelSelector.h"
 #include "OperatorPanel.h"
 #include "FilterPanel.h"
@@ -40,7 +41,9 @@ private:
     KnobLookAndFeel m_lookAndFeel;
 
     PanelSelector m_panelSelector;
-    
+   
+    PresetBarComponent m_presetBar;
+
     // Panels 
     OperatorPanelComponent m_operatorPanel;
     FilterPanelComponent m_filterPanel;
