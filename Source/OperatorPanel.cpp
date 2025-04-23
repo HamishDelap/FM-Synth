@@ -79,12 +79,13 @@ void OperatorPanelComponent::comboBoxChanged(ComboBox* newComboBox)
 
 void OperatorPanelComponent::sliderValueChanged(Slider* slider)
 {
-    UpdateLabels();
+    if (slider == &m_modRatioKnob)
+        UpdateLabels(slider->getValue());
 }
 
-void OperatorPanelComponent::UpdateLabels()
+void OperatorPanelComponent::UpdateLabels(double value)
 {
     std::stringstream modIndexStream;
-    modIndexStream << std::fixed << std::setprecision(2) << m_audioProcessor.m_stateManager.apvt.getRawParameterValue("MOD_RATIO")->load();
+    modIndexStream << std::fixed << std::setprecision(2) << value;
     m_modRatioLabel.setText(modIndexStream.str(), juce::dontSendNotification);
 }

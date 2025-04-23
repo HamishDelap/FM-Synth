@@ -26,7 +26,7 @@ public:
     void sliderValueChanged(Slider* slider) override;
 
 private:
-    void UpdateLabels();
+    void UpdateLabels(double value);
     
     FMSynthAudioProcessor& m_audioProcessor;
     

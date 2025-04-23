@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
+#include "PanelSelector.h"
 #include "OperatorPanel.h"
 #include "FilterPanel.h"
 #include "EffectsPanel.h"
@@ -30,7 +31,7 @@ public:
     void resized() override;
 
 private:
-    void UpdatePanel();
+    void UpdatePanel(PanelSelector::Panel& activePanel);
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -38,21 +39,7 @@ private:
     
     KnobLookAndFeel m_lookAndFeel;
 
-    enum class Panel {
-        Operators = 0,
-        Filter    = 1,
-        Effects   = 2,
-        Waveform  = 3
-    };
-    Panel m_currentPanel = Panel::Operators;
-
-    juce::ImageComponent m_operatorPanelIndicator;
-    juce::ImageComponent m_filterPanelIndicator;
-    juce::ImageComponent m_effectsPanelIndicator;
-    juce::ImageComponent m_waveformPanelIndicator;
-
-    juce::ImageButton m_nextBtn;
-    juce::ImageButton m_prevBtn;
+    PanelSelector m_panelSelector;
     
     // Panels 
     OperatorPanelComponent m_operatorPanel;

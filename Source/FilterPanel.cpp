@@ -52,7 +52,7 @@ void FilterPanelComponent::resized()
 {
     int knobSize = 80;
     m_qKnob.setBounds(49, 106, knobSize, knobSize);
-    m_cutoffKnob.setBounds(145, 106, knobSize, knobSize);
+    m_cutoffKnob.setBounds(144, 106, knobSize, knobSize);
     m_cutoffLabel.setBounds(260, 121, 80, 40);
 
     m_attackKnob.setBounds(17, 258, knobSize, knobSize);
