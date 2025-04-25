@@ -25,18 +25,10 @@ PresetBarComponent::PresetBarComponent(JStateManager& stateManager) : m_stateMan
 
 	setSaveButtonImages(savePassive, saveHover, saveActive);
 
-	m_label.setText("Lead", juce::dontSendNotification);
-	m_label.setFont(juce::Font(16.0f, juce::Font::bold));
-	m_label.setJustificationType(juce::Justification::centredLeft);
-	m_label.setInterceptsMouseClicks(false, false);
-	addAndMakeVisible(m_label);
-
-	m_arrow.setImage(getArrowImage());
-	m_arrow.setInterceptsMouseClicks(false, false);
-	addAndMakeVisible(m_arrow);
-
-	setInterceptsMouseClicks(true, true);
-	setMouseCursor(juce::MouseCursor::PointingHandCursor);
+    addAndMakeVisible(m_dropdown);
+	m_dropdown.setEditableText(true);
+    m_dropdown.setSelectedId(1);
+    m_dropdown.setLookAndFeel(&m_lookAndFeel);
 }
 
 void PresetBarComponent::resized()
@@ -44,9 +36,10 @@ void PresetBarComponent::resized()
 	auto bounds = getLocalBounds().reduced(4);
 	auto iconSize = bounds.getHeight();
 
-	m_saveButton.setBounds(bounds.removeFromLeft(iconSize));
-	m_arrow.setBounds(bounds.removeFromRight(iconSize / 2));
-	m_label.setBounds(bounds);
+	auto saveBounds = bounds;
+	m_saveButton.setBounds(saveBounds.removeFromLeft(iconSize).reduced(2));
+	bounds.removeFromLeft(iconSize + 6);
+	m_dropdown.setBounds(bounds);
 }
 
 void PresetBarComponent::paint(juce::Graphics& g)
@@ -57,63 +50,14 @@ void PresetBarComponent::paint(juce::Graphics& g)
 	g.setColour(juce::Colour::fromRGB(37, 39, 43));
 	g.fillRoundedRectangle(r, 4.0f);
 
-	// Hover highlight
-	if (m_isHovered)
-	{
-		g.setColour(juce::Colours::white.withAlpha(0.06f));
-		g.fillRoundedRectangle(r.reduced(1.0f), 3.0f);
-	}
-
 	// Border
 	g.setColour(juce::Colour::fromRGB(60, 60, 60));
 	g.drawRoundedRectangle(r.reduced(0.5f), 4.0f, 1.0f);
 
 	// Divider
-	float iconWidth = getHeight();
+	float iconWidth = getHeight() - 2;
 	g.setColour(juce::Colour::fromRGB(60, 60, 60));
 	g.drawLine(iconWidth, 4.0f, iconWidth, getHeight() - 4.0f, 1.0f);
-}
-
-void PresetBarComponent::mouseEnter(const juce::MouseEvent& e)
-{
-	if (e.getMouseDownPosition().getX() > (getLocalBounds().getHeight() + 4))
-	{
-		m_isHovered = true;
-		repaint();
-	}
-}
-
-void PresetBarComponent::mouseExit(const juce::MouseEvent& e)
-{
-	if (e.getMouseDownPosition().getX() > (getLocalBounds().getHeight() + 4))
-	{
-		m_isHovered = false;
-		repaint();
-	}
-}
-
-void PresetBarComponent::mouseUp(const juce::MouseEvent& e)
-{
-	if (e.getMouseDownPosition().getX() > (getLocalBounds().getHeight() + 4) && e.mouseWasClicked())
-	{
-		if (e.mouseWasClicked())
-		{
-			juce::PopupMenu menu;
-			menu.setLookAndFeel(&m_lookAndFeel);
-			menu.addItem("Lead", [this]() { setPresetText("Lead"); });
-			menu.addItem("Pad", [this]() { setPresetText("Pad"); });
-			menu.addItem("Bass", [this]() { setPresetText("Bass"); });
-
-			juce::PopupMenu::Options options;
-			menu.showMenuAsync(options);
-		}
-	}
-}
-
-void PresetBarComponent::setPresetText(const juce::String& newName)
-{
-	m_label.setText(newName, juce::dontSendNotification);
-	repaint();
 }
 
 void PresetBarComponent::setSaveButtonImages(const juce::Image& normal, const juce::Image& over, const juce::Image& down)
@@ -122,5 +66,21 @@ void PresetBarComponent::setSaveButtonImages(const juce::Image& normal, const ju
 		normal, 1.0f, {},
 		over, 1.0f, {},
 		down, 1.0f, {});
+}
+    
+void PresetBarComponent::SetCallbacks(OnSaveCallback saveCallback, OnLoadCallback loadCallback)
+{
+	m_saveCallback = saveCallback;
+	m_loadCallback = loadCallback;
+}
+
+void PresetBarComponent::PopulateDropdown(std::vector<juce::String>& items)
+{
+	int id = 1;
+	for (auto& item : items)
+	{
+		m_dropdown.addItem(item, id++);
+	}
+	m_dropdown.setSelectedId(1);
 }
 

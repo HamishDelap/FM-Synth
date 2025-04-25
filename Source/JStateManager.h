@@ -23,7 +23,7 @@ class JStateManager
     private:
         static File getPresetDirectory()
 		{
-            const String presetFolderString(File::getSpecialLocation(File::SpecialLocationType::userDocumentsDirectory).getFullPathName() + File::getSeparatorString() + "FMATOR");
+            const String presetFolderString(File::getSpecialLocation(File::SpecialLocationType::userDocumentsDirectory).getFullPathName() + File::getSeparatorString() + "MODULA");
             const File presetFolder(presetFolderString);
             if (presetFolder.isDirectory() == false)
             {
@@ -32,8 +32,8 @@ class JStateManager
             return(presetFolder);
 		}
 
-        File presetDirectory;
-        StringArray filenames;
+        File m_presetDirectory;
+        StringArray m_filenames;
 };
 
 #endif

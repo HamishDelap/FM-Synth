@@ -1,7 +1,19 @@
+/*
+  ==============================================================================
 
-#include "KnobLookAndFeel.h"
+    PresetBarLookAndFeel.cpp
+    Created: 25 Apr 2025 5:05:43pm
+    Author:  hamis
 
-void KnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
+  ==============================================================================
+*/
+
+#include "PresetBarLookAndFeel.h"
+
+
+#include "PresetBarLookAndFeel.h"
+
+void PresetBarLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
 {
     auto fill = juce::Colour::fromRGB(34, 175, 255);
     auto outline = juce::Colour::fromRGB(210, 206, 192);
@@ -45,17 +57,18 @@ void KnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int widt
     auto thumbWidth = lineW * 2.0f;
 }
 
-void KnobLookAndFeel::drawComboBox(juce::Graphics& g, int width, int height, bool,
+void PresetBarLookAndFeel::drawComboBox(juce::Graphics& g, int width, int height, bool,
     int, int, int, int, juce::ComboBox& box)
 {
     auto cornerSize = box.findParentComponentOfClass<juce::ChoicePropertyComponent>() != nullptr ? 0.0f : 3.0f;
     juce::Rectangle<int> boxBounds(0, 0, width, height);
 
-    g.setColour(juce::Colour::fromRGB(37, 39, 43));
-    g.fillRoundedRectangle(boxBounds.toFloat(), cornerSize);
+    // Take out background and outline
+ //   g.setColour(juce::Colour::fromRGB(37, 39, 43));
+ //   g.fillRoundedRectangle(boxBounds.toFloat(), cornerSize);
 
-    g.setColour(juce::Colour::fromRGB(99, 99, 99));
-    g.drawRoundedRectangle(boxBounds.toFloat().reduced(0.5f, 0.5f), cornerSize, 1.0f);
+//    g.setColour(juce::Colour::fromRGB(99, 99, 99));
+//    g.drawRoundedRectangle(boxBounds.toFloat().reduced(0.5f, 0.5f), cornerSize, 1.0f);
 
     juce::Rectangle<int> arrowZone(width - 30, 0, 20, height);
     juce::Path path;
@@ -64,15 +77,21 @@ void KnobLookAndFeel::drawComboBox(juce::Graphics& g, int width, int height, boo
     path.lineTo((float)arrowZone.getRight() - 3.0f, (float)arrowZone.getCentreY() - 2.0f);
 
     g.setColour(box.findColour(juce::ComboBox::arrowColourId).withAlpha((box.isEnabled() ? 0.9f : 0.2f)));
-    g.strokePath(path, juce::PathStrokeType(2.0f));
+    g.strokePath(path, juce::PathStrokeType(1.5f));
 }
 
-void KnobLookAndFeel::drawPopupMenuBackground (juce::Graphics& g, [[maybe_unused]] int width, [[maybe_unused]] int height)
+void PresetBarLookAndFeel::drawPopupMenuBackground(juce::Graphics& g, [[maybe_unused]] int width, [[maybe_unused]] int height)
 {
-    g.fillAll (juce::Colour::fromRGB(37, 39, 43));
+    g.fillAll(juce::Colour::fromRGB(37, 39, 43));
 }
 
-juce::Font KnobLookAndFeel::getComboBoxFont(juce::ComboBox& box)
+juce::Font PresetBarLookAndFeel::getComboBoxFont(juce::ComboBox& box)
 {
     return box.withDefaultMetrics(juce::FontOptions{ juce::jmin(16.0f, (float)box.getHeight() * 0.75f) });
 }
+
+void PresetBarLookAndFeel::drawTextEditorOutline (juce::Graphics& g, int width, int height, juce::TextEditor& textEditor)
+{
+    // Dont show the outline
+}
+

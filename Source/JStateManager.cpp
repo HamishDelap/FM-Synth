@@ -4,7 +4,7 @@ JStateManager::JStateManager(AudioProcessor& audioProcessor) :
     apvt(audioProcessor, nullptr, "DEFAULT", JStateManager::getParameterLayout())
 {
     apvt.state = ValueTree("PRESETS");
-    presetDirectory = getPresetDirectory();
+    m_presetDirectory = getPresetDirectory();
 }
 
 void JStateManager::writeState(juce::MemoryBlock& destData) 
@@ -22,7 +22,7 @@ void JStateManager::writeState(juce::MemoryBlock& destData)
 void JStateManager::readState(const void* data, int sizeInBytes) 
 {
     // Get XML document
-    XmlDocument myDocument(File(presetDirectory.getFullPathName() + File::getSeparatorString() + "preset.xml"));
+    XmlDocument myDocument(File(m_presetDirectory.getFullPathName() + File::getSeparatorString() + "preset.xml"));
     // Parse the document
     std::unique_ptr<XmlElement> xmlState(myDocument.getDocumentElement());
     
@@ -34,7 +34,7 @@ void JStateManager::readState(const void* data, int sizeInBytes)
 
 void JStateManager::readPreset(String presetName) 
 {
-    XmlDocument myDocument(File(presetDirectory.getFullPathName() + File::getSeparatorString() + presetName));
+    XmlDocument myDocument(File(m_presetDirectory.getFullPathName() + File::getSeparatorString() + presetName));
     std::unique_ptr<XmlElement> xmlState(myDocument.getDocumentElement());;
     DBG(myDocument.getLastParseError());
     if (xmlState != nullptr) { apvt.state = ValueTree::fromXml(*xmlState); }
@@ -47,17 +47,17 @@ void JStateManager::writePreset(String presetName)
     // Create XML object
     std::unique_ptr<XmlElement> xml(state.createXml());
 	// Write XML to file
-    xml->writeTo(File(presetDirectory.getFullPathName() + File::getSeparatorString() + presetName));
+    xml->writeTo(File(m_presetDirectory.getFullPathName() + File::getSeparatorString() + presetName));
 }
 
 StringArray JStateManager::getPresets() 
 {
-    filenames.clear();
+    m_filenames.clear();
 	
-    for (DirectoryEntry entry : RangedDirectoryIterator(presetDirectory, true)) {
-		filenames.add(entry.getFile().getFileName());
+    for (DirectoryEntry entry : RangedDirectoryIterator(m_presetDirectory, true)) {
+		m_filenames.add(entry.getFile().getFileName());
     }
-	return(filenames);
+	return(m_filenames);
 }
 
 AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout()

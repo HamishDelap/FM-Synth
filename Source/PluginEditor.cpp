@@ -31,6 +31,12 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
         UpdatePanel(panel);
 	});
 
+    std::vector<juce::String> items;
+    items.push_back("Lead");
+    items.push_back("Pad");
+    items.push_back("Bass");
+
+    m_presetBar.PopulateDropdown(items);
     addAndMakeVisible(m_presetBar);
 }
 
@@ -77,7 +83,7 @@ void FMSynthAudioProcessorEditor::paint (juce::Graphics& g)
 
 void FMSynthAudioProcessorEditor::resized()
 {
-    m_presetBar.setBounds(338, 28, 120, 22);
+    m_presetBar.setBounds(328, 28, 130, 26);
 
     m_panelSelector.setBounds(57, 35, 190, 38);
 
