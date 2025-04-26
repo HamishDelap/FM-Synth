@@ -25,14 +25,15 @@ public:
 
     using OnSaveCallback = std::function<void(juce::String&)>;
     using OnLoadCallback = std::function<void(juce::String&)>;
-    void SetCallbacks(OnSaveCallback saveCallback, OnLoadCallback loadCallback);
 
-    void PopulateDropdown(std::vector<juce::String>& items);
+    void PopulateDropdown(const juce::StringArray& presets);
 
 private:
     JStateManager& m_stateManager;
     OnSaveCallback m_saveCallback;
     OnLoadCallback m_loadCallback;
+
+    std::map<int, juce::String> m_dropdownPresets;
 
     PresetBarLookAndFeel m_lookAndFeel;
     juce::ImageButton m_saveButton;

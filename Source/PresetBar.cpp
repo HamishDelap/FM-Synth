@@ -15,7 +15,24 @@ PresetBarComponent::PresetBarComponent(JStateManager& stateManager) : m_stateMan
 	m_saveButton.setClickingTogglesState(false);
 	m_saveButton.setTooltip("Save preset");
 	m_saveButton.onClick = [this]() {
-		
+		auto presets = m_stateManager.getPresets();
+		auto text = m_dropdown.getText();
+		if (text.isEmpty())
+		{
+			// Show a modal warning the user
+			jassertfalse;
+		}
+		else if (presets.contains(text, true))
+		{
+			// Pre-existing preset so maybe confirm overwrite?
+			jassertfalse;
+		}
+		else
+		{
+			// Write the preset
+			m_stateManager.writePreset(m_dropdown.getText());
+		}
+		PopulateDropdown(presets);
 	};
 	addAndMakeVisible(m_saveButton);
     
@@ -25,10 +42,23 @@ PresetBarComponent::PresetBarComponent(JStateManager& stateManager) : m_stateMan
 
 	setSaveButtonImages(savePassive, saveHover, saveActive);
 
+	PopulateDropdown(m_stateManager.getPresets());
     addAndMakeVisible(m_dropdown);
 	m_dropdown.setEditableText(true);
     m_dropdown.setSelectedId(1);
     m_dropdown.setLookAndFeel(&m_lookAndFeel);
+	m_dropdown.onChange = [this]() {
+		try
+		{
+			auto preset = m_dropdownPresets.at(m_dropdown.getSelectedId());
+			m_stateManager.readPreset(preset);
+		}
+		catch (std::out_of_range& ex)
+		{
+			// Id's have gone out of whack
+			jassertfalse;
+		}
+	};
 }
 
 void PresetBarComponent::resized()
@@ -68,19 +98,14 @@ void PresetBarComponent::setSaveButtonImages(const juce::Image& normal, const ju
 		down, 1.0f, {});
 }
     
-void PresetBarComponent::SetCallbacks(OnSaveCallback saveCallback, OnLoadCallback loadCallback)
+void PresetBarComponent::PopulateDropdown(const juce::StringArray& presets)
 {
-	m_saveCallback = saveCallback;
-	m_loadCallback = loadCallback;
-}
-
-void PresetBarComponent::PopulateDropdown(std::vector<juce::String>& items)
-{
+	m_dropdown.clear(juce::dontSendNotification);
 	int id = 1;
-	for (auto& item : items)
+	for (auto& item : presets)
 	{
+		m_dropdownPresets.insert({ id, item });
 		m_dropdown.addItem(item, id++);
 	}
-	m_dropdown.setSelectedId(1);
 }
 

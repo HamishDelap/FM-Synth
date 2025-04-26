@@ -31,12 +31,6 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
         UpdatePanel(panel);
 	});
 
-    std::vector<juce::String> items;
-    items.push_back("Lead");
-    items.push_back("Pad");
-    items.push_back("Bass");
-
-    m_presetBar.PopulateDropdown(items);
     addAndMakeVisible(m_presetBar);
 }
 
