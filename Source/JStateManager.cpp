@@ -78,7 +78,7 @@ AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout(
         params.add(std::make_unique<AudioParameterInt>("CARRIER_WAVEFORM", "Carrier Waveform", 1, 4, 4));
         params.add(std::make_unique<AudioParameterFloat>("CARRIER_ATTACK", "Carrier Attack", 0.01, 10, 0.25));
         params.add(std::make_unique<AudioParameterFloat>("CARRIER_DECAY", "Carrier Decay", 0, 10, 0.2));
-        params.add(std::make_unique<AudioParameterFloat>("CARRIER_SUSTAIN", "Carrier Sustain", 0, 10, 1));
+        params.add(std::make_unique<AudioParameterFloat>("CARRIER_SUSTAIN", "Carrier Sustain", 0, 1, 1));
         params.add(std::make_unique<AudioParameterFloat>("CARRIER_RELEASE", "Carrier Release", 0, 10, 0.5));
 
         // Filter

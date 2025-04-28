@@ -17,6 +17,7 @@
 #include "FilterPanel.h"
 #include "EffectsPanel.h"
 #include "WaveformPanel.h"
+#include "VUComponent.h"
 
 //==============================================================================
 /**
@@ -43,6 +44,8 @@ private:
     PanelSelector m_panelSelector;
    
     PresetBarComponent m_presetBar;
+
+    VUComponent m_vuMeter;
 
     // Panels 
     OperatorPanelComponent m_operatorPanel;

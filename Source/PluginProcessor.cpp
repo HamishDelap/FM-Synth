@@ -121,6 +121,7 @@ void FMSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     }
 
     m_pWaveformProcessor = std::make_unique<WaveformProcessor>(sampleRate, 1, 2);
+    m_pVUMeterProcessor = std::make_unique<VUProcessor>(sampleRate, 1, 2);
 }
 
 void FMSynthAudioProcessor::releaseResources()
@@ -210,6 +211,7 @@ void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
     }
 
     if (m_pWaveformProcessor) { m_pWaveformProcessor->PushBuffer(buffer); }
+    if (m_pVUMeterProcessor) { m_pVUMeterProcessor->PushBuffer(buffer); }
 }
 
 //==============================================================================
@@ -244,6 +246,15 @@ bool FMSynthAudioProcessor::GetWaveformVisualisationBuffer(juce::AudioBuffer<flo
     if (m_pWaveformProcessor)
     {
 		return m_pWaveformProcessor->PullBuffer(outBuffer);
+    }
+    return false;
+}
+
+bool FMSynthAudioProcessor::GetVUMeterBuffer(juce::AudioBuffer<float>& outBuffer)
+{
+    if (m_pVUMeterProcessor)
+    {
+		return m_pVUMeterProcessor->PullBuffer(outBuffer);
     }
     return false;
 }

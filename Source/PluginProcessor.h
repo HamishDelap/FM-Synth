@@ -12,6 +12,7 @@
 #include "SynthVoice.h"
 #include "JStateManager.h"
 #include "WaveformProcessor.h"
+#include "VUProcessor.h"
 
 //==============================================================================
 /**
@@ -59,7 +60,9 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    // Only call from UI
     bool GetWaveformVisualisationBuffer(juce::AudioBuffer<float>& outBuffer);
+    bool GetVUMeterBuffer(juce::AudioBuffer<float>& outBuffer);
 
     juce::MidiKeyboardState m_keyboardState;
     JStateManager m_stateManager;
@@ -73,6 +76,7 @@ private:
 
     std::unique_ptr<lldsp::effects::Reverb> m_reverb;
     std::unique_ptr<WaveformProcessor> m_pWaveformProcessor;
+    std::unique_ptr<VUProcessor> m_pVUMeterProcessor;
    
 
     //==============================================================================

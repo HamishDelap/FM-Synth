@@ -12,7 +12,7 @@
 //==============================================================================
 FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor& p)
     : AudioProcessorEditor (&p), m_audioProcessor (p),
-    m_operatorPanel(p), m_filterPanel(p), m_effectsPanel(p), m_waveformPanel(p), m_presetBar(p.m_stateManager)
+    m_operatorPanel(p), m_filterPanel(p), m_effectsPanel(p), m_waveformPanel(p), m_presetBar(p.m_stateManager), m_vuMeter(p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -32,6 +32,7 @@ FMSynthAudioProcessorEditor::FMSynthAudioProcessorEditor (FMSynthAudioProcessor&
 	});
 
     addAndMakeVisible(m_presetBar);
+    addAndMakeVisible(m_vuMeter);
 }
 
 FMSynthAudioProcessorEditor::~FMSynthAudioProcessorEditor()
@@ -80,6 +81,8 @@ void FMSynthAudioProcessorEditor::resized()
     m_presetBar.setBounds(328, 28, 130, 26);
 
     m_panelSelector.setBounds(57, 35, 190, 38);
+
+    m_vuMeter.setBounds(465, 190, 40, 120);
 
     m_operatorPanel.setBounds(57, 72, 401, 371);
 	m_filterPanel.setBounds(57, 72, 401, 371);

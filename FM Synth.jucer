@@ -5,6 +5,19 @@
               cppLanguageStandard="17" headerPath="..\..\libs\LLDSP\src" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="rd4STg" name="FM Synth">
     <GROUP id="{150C4FCA-27E3-0C80-1333-98EDF0771AE6}" name="Assets">
+      <GROUP id="{F9B5CF33-77C5-9FAB-F1A0-88A39984C930}" name="VU">
+        <FILE id="sEv8E8" name="vu-0.png" compile="0" resource="1" file="Assets/VU Meter/vu-0.png"/>
+        <FILE id="EkeuR2" name="vu-1.png" compile="0" resource="1" file="Assets/VU Meter/vu-1.png"/>
+        <FILE id="J1xZwK" name="vu-2.png" compile="0" resource="1" file="Assets/VU Meter/vu-2.png"/>
+        <FILE id="acfou4" name="vu-3.png" compile="0" resource="1" file="Assets/VU Meter/vu-3.png"/>
+        <FILE id="PUFp9f" name="vu-4.png" compile="0" resource="1" file="Assets/VU Meter/vu-4.png"/>
+        <FILE id="iEKDtw" name="vu-5.png" compile="0" resource="1" file="Assets/VU Meter/vu-5.png"/>
+        <FILE id="masVFp" name="vu-6.png" compile="0" resource="1" file="Assets/VU Meter/vu-6.png"/>
+        <FILE id="T51hf8" name="vu-7.png" compile="0" resource="1" file="Assets/VU Meter/vu-7.png"/>
+        <FILE id="PcrAYZ" name="vu-8.png" compile="0" resource="1" file="Assets/VU Meter/vu-8.png"/>
+        <FILE id="Uttl6p" name="vu-9.png" compile="0" resource="1" file="Assets/VU Meter/vu-9.png"/>
+        <FILE id="GU0Uau" name="vu-10.png" compile="0" resource="1" file="Assets/VU Meter/vu-10.png"/>
+      </GROUP>
       <FILE id="mUwmn2" name="EffectsIndicator-Active.png" compile="0" resource="1"
             file="Assets/Panel Indicator/EffectsIndicator-Active.png"/>
       <FILE id="rdzW0a" name="EffectsIndicator-Hover.png" compile="0" resource="1"
@@ -44,6 +57,10 @@
             file="Assets/WaveformPanel.png"/>
     </GROUP>
     <GROUP id="{AA71D200-8088-7778-4781-35418D43852C}" name="Source">
+      <FILE id="o889lV" name="VUComponent.cpp" compile="1" resource="0" file="Source/VUComponent.cpp"/>
+      <FILE id="NDXbBe" name="VUComponent.h" compile="0" resource="0" file="Source/VUComponent.h"/>
+      <FILE id="SAEUNW" name="VUProcessor.cpp" compile="1" resource="0" file="Source/VUProcessor.cpp"/>
+      <FILE id="nlF3xg" name="VUProcessor.h" compile="0" resource="0" file="Source/VUProcessor.h"/>
       <FILE id="M3DnOn" name="PresetBarLookAndFeel.cpp" compile="1" resource="0"
             file="Source/PresetBarLookAndFeel.cpp"/>
       <FILE id="vhsq0r" name="PresetBarLookAndFeel.h" compile="0" resource="0"

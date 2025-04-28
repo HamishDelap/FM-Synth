@@ -97,7 +97,7 @@ void PresetBarComponent::setSaveButtonImages(const juce::Image& normal, const ju
 		over, 1.0f, {},
 		down, 1.0f, {});
 }
-    
+
 void PresetBarComponent::PopulateDropdown(const juce::StringArray& presets)
 {
 	m_dropdown.clear(juce::dontSendNotification);
