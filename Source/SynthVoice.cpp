@@ -23,6 +23,9 @@ void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::Synthesiser
 	m_modulatorEnvelope.NoteOn();
 	m_carrierEnvelope.NoteOn();
 	m_filterEnvelope.NoteOn();
+
+	m_carrier.Reset();
+	m_modulator.Reset();
 }
 
 void SynthVoice::stopNote(float velocity, bool allowTailOff)
@@ -99,6 +102,9 @@ void SynthVoice::SetParameters(const Parameters& parameters)
 // DANGER: Currently assuming processor is mono so will copy left channel to right.
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples)
 {
+	m_carrierEnvelope.SetParameters(m_parameters.carrierADSRParams);
+	m_filterEnvelope.SetParameters(m_parameters.filterADSRParams);
+
 	for (int sampleIndex = 0; sampleIndex < numSamples; sampleIndex++)
 	{
 		double modulatorOutput = m_modulator.Sample((m_newFrequency / m_parameters.modRatio), 1);
