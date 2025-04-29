@@ -191,6 +191,16 @@ void FMSynthAudioProcessor::UpdateVoiceParameters()
     }
 }
 
+static float CubicClipper(float sample)
+{
+	if (sample > 1.0)
+		return 2.0 / 3.0;
+	else if (sample < -1.0)
+		return -2.0 / 3.0;
+	else
+		return sample - (sample * sample * sample) / 3.0;
+}
+
 void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     UpdateVoiceParameters();
@@ -205,8 +215,12 @@ void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
         rChannelData[sampleIndex] = m_reverb->Process(rChannelData[sampleIndex], m_parameters.reverbTime, m_parameters.reverbAmount);
         if (m_parameters.distortionGain > 0)
         {
-			rChannelData[sampleIndex] = lldsp::effects::TanhWaveshaper(rChannelData[sampleIndex], m_parameters.distortionGain);
+			rChannelData[sampleIndex] = lldsp::effects::DafxDistortion(rChannelData[sampleIndex], m_parameters.distortionGain);
         }
+
+        // Soft Clipping
+        rChannelData[sampleIndex] = CubicClipper(rChannelData[sampleIndex]);
+        
         lChannelData[sampleIndex] = rChannelData[sampleIndex];
     }
 
