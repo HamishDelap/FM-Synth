@@ -35,7 +35,7 @@ set(BUNDLE_ID "com.company.moduala")
 
 # Change me! Set the plugin formats you want built
 # Valid choices: AAX Unity VST VST3 AU AUv3 Standalone
-set(FORMATS Standalone VST3)
+set(FORMATS Standalone AU VST3 AUv3)
 
 # For simplicity, the name of the CMake project is also the name of the target
 project(${PROJECT_NAME} VERSION ${CURRENT_VERSION})
@@ -57,7 +57,10 @@ add_subdirectory(libs/JUCE)
 juce_add_plugin("${PROJECT_NAME}"
     # Icons for the standalone app
     ICON_BIG "${CMAKE_CURRENT_SOURCE_DIR}/packaging/icon.png"
-
+    
+    IS_SYNTH TRUE
+    NEEDS_MIDI_INPUT TRUE 
+   
     # Change me!
     COMPANY_NAME "${COMPANY_NAME}"
     BUNDLE_ID "${BUNDLE_ID}"
@@ -98,6 +101,7 @@ include(SharedCodeDefaults)
 file(GLOB_RECURSE SourceFiles CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/source/*.h")
 target_sources(SharedCode INTERFACE ${SourceFiles})
 
+# Build LLDSP and include
 file(GLOB_RECURSE SourceFiles CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/libs/LLDSP/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/libs/LLDSP/src/*.h")
 target_sources(SharedCode INTERFACE ${SourceFiles})
 
