@@ -31,9 +31,6 @@ class JStateManager
             }
             return(presetFolder);
 		}
-
-        File m_presetDirectory;
-        StringArray m_filenames;
 };
 
 #endif

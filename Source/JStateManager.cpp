@@ -4,7 +4,6 @@ JStateManager::JStateManager(AudioProcessor& audioProcessor) :
     apvt(audioProcessor, nullptr, "DEFAULT", JStateManager::getParameterLayout())
 {
     apvt.state = ValueTree("PRESETS");
-    m_presetDirectory = getPresetDirectory();
 }
 
 void JStateManager::writeState(juce::MemoryBlock& destData) 
@@ -22,19 +21,17 @@ void JStateManager::writeState(juce::MemoryBlock& destData)
 void JStateManager::readState(const void* data, int sizeInBytes) 
 {
     // Get XML document
-    XmlDocument myDocument(File(m_presetDirectory.getFullPathName() + File::getSeparatorString() + "preset.xml"));
+    XmlDocument myDocument(File(getPresetDirectory().getFullPathName() + File::getSeparatorString() + "preset.xml"));
     // Parse the document
     std::unique_ptr<XmlElement> xmlState(myDocument.getDocumentElement());
     
     // If it is not a nullptr (parsing succeeded) then continue, otherwise get next value
     if (xmlState != nullptr) { apvt.state = ValueTree::fromXml(*xmlState); }
-
-    JStateManager::getPresets();
 }
 
 void JStateManager::readPreset(String presetName) 
 {
-    XmlDocument myDocument(File(m_presetDirectory.getFullPathName() + File::getSeparatorString() + presetName));
+    XmlDocument myDocument(File(getPresetDirectory().getFullPathName() + File::getSeparatorString() + presetName));
     std::unique_ptr<XmlElement> xmlState(myDocument.getDocumentElement());;
     DBG(myDocument.getLastParseError());
     if (xmlState != nullptr) { apvt.state = ValueTree::fromXml(*xmlState); }
@@ -47,17 +44,16 @@ void JStateManager::writePreset(String presetName)
     // Create XML object
     std::unique_ptr<XmlElement> xml(state.createXml());
 	// Write XML to file
-    xml->writeTo(File(m_presetDirectory.getFullPathName() + File::getSeparatorString() + presetName));
+    xml->writeTo(File(getPresetDirectory().getFullPathName() + File::getSeparatorString() + presetName));
 }
 
 StringArray JStateManager::getPresets() 
 {
-    m_filenames.clear();
-	
-    for (DirectoryEntry entry : RangedDirectoryIterator(m_presetDirectory, true)) {
-		m_filenames.add(entry.getFile().getFileName());
+    juce::StringArray presets;
+    for (DirectoryEntry entry : RangedDirectoryIterator(getPresetDirectory(), true)) {
+		presets.add(entry.getFile().getFileName());
     }
-	return(m_filenames);
+	return presets;
 }
 
 AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout()
@@ -94,7 +90,6 @@ AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterLayout(
         params.add(std::make_unique<AudioParameterFloat>("REVERB_AMOUNT", "Reverb Amount", 0, 1, 0.1));
 
         // Distortion
-        params.add(std::make_unique<AudioParameterFloat>("DISTORTION_GAIN", "Distortion Gain", 0, 2, 0.25));
-
+        params.add(std::make_unique<AudioParameterFloat>("DISTORTION_GAIN", "Distortion Gain", 0, 1, 0.25));
         return params;
 }
