@@ -9,6 +9,7 @@
 */
 
 #include "VUComponent.h"
+#include "BinaryData.h"
 
 VUComponent::VUComponent(FMSynthAudioProcessor& p) : m_audioProcessor(p)
 {

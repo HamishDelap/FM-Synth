@@ -9,6 +9,7 @@
 */
 
 #include "PresetBar.h"
+#include "BinaryData.h"
 
 PresetBarComponent::PresetBarComponent(JStateManager& stateManager) : m_stateManager(stateManager)
 {

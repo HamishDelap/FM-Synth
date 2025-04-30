@@ -1,7 +1,7 @@
 #ifndef _JSTATEMANAGER_
 #define _JSTATEMANAGER_
 
-#include <JuceHeader.h>
+#include <juce_audio_processors/juce_audio_processors.h>
 
 using namespace juce;
 class JStateManager

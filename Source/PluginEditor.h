@@ -8,10 +8,10 @@
 
 #pragma once
 
-#include <JuceHeader.h>
+#include <juce_audio_processors/juce_audio_processors.h>
 #include "PluginProcessor.h"
 
-#include "PresetBar.h";
+#include "PresetBar.h"
 #include "PanelSelector.h"
 #include "OperatorPanel.h"
 #include "FilterPanel.h"

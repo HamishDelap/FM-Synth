@@ -9,6 +9,7 @@
 */
 
 #include "PanelSelector.h"
+#include "BinaryData.h"
 
 PanelSelector::PanelSelector()
 {

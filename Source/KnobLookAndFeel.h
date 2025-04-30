@@ -1,6 +1,6 @@
 
 #pragma once
-#include <../JuceLibraryCode/JuceHeader.h>
+#include <juce_audio_processors/juce_audio_processors.h>
 
 class KnobLookAndFeel : public juce::LookAndFeel_V4
 {

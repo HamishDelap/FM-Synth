@@ -10,9 +10,6 @@
 
 #include "PresetBarLookAndFeel.h"
 
-
-#include "PresetBarLookAndFeel.h"
-
 void PresetBarLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
 {
     auto fill = juce::Colour::fromRGB(34, 175, 255);

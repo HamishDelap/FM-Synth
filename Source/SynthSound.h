@@ -1,5 +1,5 @@
 #pragma once
-#include <../JuceLibraryCode/JuceHeader.h>
+#include <juce_audio_processors/juce_audio_processors.h>
 
 class SynthSound : public juce::SynthesiserSound
 {
