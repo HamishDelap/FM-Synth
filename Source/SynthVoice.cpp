@@ -40,6 +40,7 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
 	else
 	{
 		clearCurrentNote();
+		m_filter.Reset();
 	}
 }
 

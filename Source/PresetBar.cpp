@@ -32,6 +32,7 @@ PresetBarComponent::PresetBarComponent(JStateManager& stateManager) : m_stateMan
 			// Write the preset
 			m_stateManager.writePreset(m_dropdown.getText());
 		}
+		presets = m_stateManager.getPresets();
 		PopulateDropdown(presets);
 	};
 	addAndMakeVisible(m_saveButton);
@@ -45,13 +46,16 @@ PresetBarComponent::PresetBarComponent(JStateManager& stateManager) : m_stateMan
 	PopulateDropdown(m_stateManager.getPresets());
     addAndMakeVisible(m_dropdown);
 	m_dropdown.setEditableText(true);
-    m_dropdown.setSelectedId(1);
+    m_dropdown.setSelectedId(0, juce::dontSendNotification);
     m_dropdown.setLookAndFeel(&m_lookAndFeel);
 	m_dropdown.onChange = [this]() {
 		try
 		{
-			auto preset = m_dropdownPresets.at(m_dropdown.getSelectedId());
-			m_stateManager.readPreset(preset);
+			if (auto selectedId = m_dropdown.getSelectedId(); selectedId > 0)
+			{
+				auto preset = m_dropdownPresets.at(m_dropdown.getSelectedId());
+				m_stateManager.readPreset(preset);
+			}
 		}
 		catch (std::out_of_range& ex)
 		{

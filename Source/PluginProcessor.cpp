@@ -198,7 +198,7 @@ static float CubicClipper(float sample)
 	else if (sample < -1.0)
 		return -2.0 / 3.0;
 	else
-		return sample - (sample * sample * sample) / 3.0;
+		return (sample - (sample * sample * sample) / 3.0);
 }
 
 void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
