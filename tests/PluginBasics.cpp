@@ -19,6 +19,22 @@ TEST_CASE ("Plugin instance", "[instance]")
     }
 }
 
+TEST_CASE("Empty input", "[instance]")
+{
+    FMSynthAudioProcessor processor;
+    processor.prepareToPlay(44100.0, 512); // Typical setup
+
+    // Create dummy buffers
+    juce::AudioBuffer<float> audioBuffer(2, 512); // stereo buffer, 512 samples
+    audioBuffer.clear();
+
+    juce::MidiBuffer midiBuffer;
+
+    processor.processBlock(audioBuffer, midiBuffer);
+   
+    float sample = audioBuffer.getSample(0, 0);
+    REQUIRE(juce::approximatelyEqual(0.0f, sample));
+}
 
 #ifdef PAMPLEJUCE_IPP
     #include <ipp.h>

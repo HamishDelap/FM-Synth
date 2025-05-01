@@ -27,7 +27,7 @@ class JStateManager
             const File presetFolder(presetFolderString);
             if (presetFolder.isDirectory() == false)
             {
-                bool b = presetFolder.createDirectory();
+                presetFolder.createDirectory();
             }
             return(presetFolder);
 		}
