@@ -33,4 +33,20 @@ TEST_CASE ("Boot performance")
             return plugin.getActiveEditor();
         });
     };
+    
+    BENCHMARK_ADVANCED ("Empty processBlock")
+    (Catch::Benchmark::Chronometer meter)
+    {
+        FMSynthAudioProcessor plugin;
+		FMSynthAudioProcessor processor;
+		processor.prepareToPlay(44100.0, 512); // Typical setup
+		// Create dummy buffers
+		juce::AudioBuffer<float> audioBuffer(2, 512); // stereo buffer, 512 samples
+		audioBuffer.clear();
+		juce::MidiBuffer midiBuffer;
+
+        meter.measure ([&] (int /* i */) {
+			processor.processBlock(audioBuffer, midiBuffer);
+        });
+    };
 }
