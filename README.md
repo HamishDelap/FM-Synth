@@ -1,5 +1,5 @@
 # FM Synth
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/:user/:repo/:workflow)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/HamishDelap/FM-Synth)
 
 A simple yet expressive FM synthesizer implemented using LLDSP & JUCE.
 Currently the architecture is a carrier with a single modulator where the modulators waveform matches that of the carrier. The plugin implements a simple biquad low-pass filter with its own envelope. Finally there is a distortion and my schroeder reverb implementation.
