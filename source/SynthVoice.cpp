@@ -12,7 +12,8 @@ void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::Synthesiser
 {
 	m_trueFrequency = juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber);
 	UpdateFrequency();
-	m_level = 1; velocity * 0.15;
+	m_level = 1; 
+	m_velocity = velocity;
 
 	m_modulatorEnvelope.SetParameters(m_parameters.modADSRParams);
 	m_carrierEnvelope.SetParameters(m_parameters.carrierADSRParams);
@@ -115,7 +116,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 
 		if (m_parameters.filterCutoff != 0)
 		{
-			m_filter.SetCutoff(m_filterEnvelope.Process(m_parameters.filterCutoff), m_parameters.filterQ, 1);
+			m_filter.SetCutoff(m_filterEnvelope.Process(m_parameters.filterCutoff * m_velocity), m_parameters.filterQ, 1);
 			sample = m_filter.Process(sample);
 		}
 

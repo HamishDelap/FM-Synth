@@ -52,6 +52,7 @@ private:
     double m_newFrequency = 0;
     double m_pitchBendChange = 0;
     double m_level = 0;
+    double m_velocity = 0;
 
     Parameters m_parameters;
    
