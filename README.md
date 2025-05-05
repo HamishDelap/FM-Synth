@@ -1,4 +1,4 @@
-# FM Synth
+# Modula
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/HamishDelap/FM-Synth)
 
 A simple yet expressive FM synthesizer implemented using LLDSP & JUCE.
