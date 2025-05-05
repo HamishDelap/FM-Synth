@@ -1,0 +1,36 @@
+#ifndef _JSTATEMANAGER_
+#define _JSTATEMANAGER_
+
+#include <juce_audio_processors/juce_audio_processors.h>
+
+using namespace juce;
+class JStateManager
+{
+    public:
+        JStateManager(AudioProcessor& audioProcessor);
+
+        void writeState(MemoryBlock&);
+        void readState(const void*, int);
+
+        void writePreset(String presetName);
+        void readPreset(String presetName);
+
+        AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
+
+        StringArray getPresets();
+        AudioProcessorValueTreeState apvt; // Could be std::unique_pointer?
+
+    private:
+        static File getPresetDirectory()
+		{
+            const String presetFolderString(File::getSpecialLocation(File::SpecialLocationType::userDocumentsDirectory).getFullPathName() + File::getSeparatorString() + "MODULA");
+            const File presetFolder(presetFolderString);
+            if (presetFolder.isDirectory() == false)
+            {
+                presetFolder.createDirectory();
+            }
+            return(presetFolder);
+		}
+};
+
+#endif
