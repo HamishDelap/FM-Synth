@@ -31,12 +31,12 @@ public:
     {
         double modRatio = 1;
         double modLevel = 1;
-        lldsp::ADSR::Parameters modADSRParams;
-        lldsp::ADSR::Parameters carrierADSRParams;
+        lldsp::dsp::ADSR::Parameters modADSRParams;
+        lldsp::dsp::ADSR::Parameters carrierADSRParams;
         lldsp::oscillators::Waveform carrierWaveform;
         double filterCutoff = 1000;
         double filterQ = 0;
-        lldsp::ADSR::Parameters filterADSRParams;
+        lldsp::dsp::ADSR::Parameters filterADSRParams;
         double reverbTime = 0;
         double reverbAmount = 0;
         double distortionGain = 0;
@@ -56,12 +56,12 @@ private:
 
     Parameters m_parameters;
    
-    lldsp::ADSR m_filterEnvelope;
+    lldsp::dsp::ADSR m_filterEnvelope;
     lldsp::dsp::BiQuadFilter m_filter;
 
     lldsp::oscillators::Oscillator m_modulator;
-    lldsp::ADSR m_modulatorEnvelope;
+    lldsp::dsp::ADSR m_modulatorEnvelope;
     lldsp::oscillators::Oscillator m_carrier;
-    lldsp::ADSR m_carrierEnvelope;
+    lldsp::dsp::ADSR m_carrierEnvelope;
 
 };
