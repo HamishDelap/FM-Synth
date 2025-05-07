@@ -20,13 +20,8 @@ void JStateManager::writeState(juce::MemoryBlock& destData)
 // Read state from memory
 void JStateManager::readState(const void* data, int sizeInBytes) 
 {
-    // Get XML document
-    XmlDocument myDocument(File(getPresetDirectory().getFullPathName() + File::getSeparatorString() + "preset.xml"));
-    // Parse the document
-    std::unique_ptr<XmlElement> xmlState(myDocument.getDocumentElement());
-    
-    // If it is not a nullptr (parsing succeeded) then continue, otherwise get next value
-    if (xmlState != nullptr) { apvt.state = ValueTree::fromXml(*xmlState); }
+    std::unique_ptr<juce::XmlElement> xmlState = juce::AudioProcessor::getXmlFromBinary(data, sizeInBytes);
+    if (xmlState != nullptr) { apvt.state = juce::ValueTree::fromXml(*xmlState); }
 }
 
 void JStateManager::readPreset(String presetName) 
