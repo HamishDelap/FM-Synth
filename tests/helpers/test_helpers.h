@@ -29,3 +29,22 @@
     plugin.editorBeingDeleted (editor);
     delete editor;
 }
+
+[[maybe_unused]] static bool IsBufferZeroed(juce::AudioBuffer<float>& buffer)
+{
+    int size = buffer.getNumSamples();
+    int channelCount = buffer.getNumChannels();
+
+    for (int i = 0; i < channelCount; i++)
+    {
+        auto bufferPtr = buffer.getReadPointer(i);
+        for (int j = 0; j < size; j++)
+        {
+            if (!juce::approximatelyEqual(bufferPtr[j], 0.0f))
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
