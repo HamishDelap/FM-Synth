@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FILTERGRAPH>
+  <FILTER uid="1" x="0.5" y="0.1" useARA="0">
+    <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="246006c0"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="2" isShell="0" hasARAExtension="0" uid="246006c0"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="2" x="0.25" y="0.1" useARA="0">
+    <PLUGIN name="MIDI Input" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="a9e4f9eb"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="0" isShell="0" hasARAExtension="0" uid="a9e4f9eb"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="3" x="0.5" y="0.9" useARA="0">
+    <PLUGIN name="Audio Output" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="724248cb"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="2"
+            numOutputs="0" isShell="0" hasARAExtension="0" uid="724248cb"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="4" x="0.25" y="0.9" useARA="0">
+    <PLUGIN name="MIDI Output" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="9d5bbb00"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="0" isShell="0" hasARAExtension="0" uid="9d5bbb00"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="5" x="0.85875" y="1.082661290322581" useARA="0">
+    <PLUGIN name="Modula" format="VST3" category="Instrument|Synth" manufacturer="My Company"
+            version="0.0.1" file="C:\Program Files\Common Files\VST3\Modula.vst3\Contents\x86_64-win\Modula.vst3"
+            uniqueId="f6f199aa" isInstrument="1" fileTime="196aaf5f7e5" infoUpdateTime="196aafc13fd"
+            numInputs="0" numOutputs="2" isShell="0" hasARAExtension="0"
+            uid="ae6040a2"/>
+    <STATE>982.VMjLgz7....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XSMx3hUMoFSmIlZt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSPkTUQMUUDU0TzLzSPUjZTEDLDgzaQY0SnwDUPIURUIUQIAyUAEUQUETS5IEZ2f1S23RUPIUQTMkYpYTV3fDdPETRqQURUoFUkEEUQMTQTYEZ2f1S23RUPIUQTMkYpYTV3fDdPETRqQURUoFUkkTUQwTUTA0TUoFR0MyPOAUQpQUPvPDRuEkUOgFSTAkTIUkTEkDLWMUUvPEUEQkTNkDdKkicCQUPIUETMEjTZoFLogzPEoFURsFUQIENvTUPYUUTFgiZT0TR3sTN1MDUAkTUP0TPRokZvjFRDsldTQENpQEUqo2TNgCLQEzZpMEZ2f1S23RUPIUQTMkYpYTV3fDZQkzcDUUQIAyUAEUQUETS5IEZ2f1S23RUPIUQTMkYpYTV3fDZQkzcDUUQIAyUCUUQU8TVpEEZ2f1S23RUPIUQTMkYpYTV3fDZQkzcDUUQIAyUDUkdPEzZqgTcyLzSPUjZTEDLDgzaQY0SngEURwTTUEkT3TEUncCZOciKUAkTEQ0TlolQYgCRnEUR2QTUEkDLWIUUDMUQEoGUEkDdKkicCQUPIUETMEjTZoFLogjQqQzTTUkZTUVSUU0TQUETIQiZHU2LC8DTEoFUAACQH8VTV8DZ5o2TDgSUPQUTUA0PyoFR0MyPOAUQpQUPvPDRuEkUOgld5MEQ3TTTE0DUPkUR3sTN1MDUAkTUP0TPRokZvjFRMgCQQU1cTEkUUQzTncCZOciKUAkTEQ0TlolQYgCRRM0SQo2URUDQUkDNpgTcyLzSPUjZTEDLDgzaQY0SnomdSQDNqQUQ2QUTA0TUQg1Mn8zMtTETRUDUSYlZFkENHI0TOEkdWMUUvPEUEQkTNkDdKkicCQUPIUETMEjTZoFLogjTUoVUEkzZPUVQTM0SUs1TTkDdKkicCQUPIUETMEjTZoFLogjTUoVUEkzZPUVTUIUSUoFR0MyPOUmKqQUQMUUTT0zZO4hKt3hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEVtPDTtHzZGI1YMIiXtPDTtLjKPcjKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
+    <LAYOUT>
+      <INPUTS/>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="6" x="0.41625" y="0.4697580645161291" useARA="0" uiLastX_Normal="296"
+          uiLastY_Normal="473" uiopen_Normal="1">
+    <PLUGIN name="Modula" format="VST3" category="Instrument|Synth" manufacturer="My Company"
+            version="0.0.1" file="C:\Program Files\Common Files\VST3\Modula.vst3\Contents\x86_64-win\Modula.vst3"
+            uniqueId="f6f199aa" isInstrument="1" fileTime="196aaf5f7e5" infoUpdateTime="196aafc13fd"
+            numInputs="0" numOutputs="2" isShell="0" hasARAExtension="0"
+            uid="ae6040a2"/>
+    <STATE>982.VMjLgz7....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XSMx3hUMoFSmIlZt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSPkTUQMUUDU0TzLzSPUjZTEDLDgzaQY0SnwDUPIURUIUQIAyUAEUQUETS5IEZ2f1S23RUPIUQTMkYpYTV3fDdPETRqQURUoFUkEEUQMTQTYEZ2f1S23RUPIUQTMkYpYTV3fDdPETRqQURUoFUkkTUQwTUTA0TUoFR0MyPOAUQpQUPvPDRuEkUOgFSTAkTIUkTEkDLWMUUvPEUEQkTNkDdKkicCQUPIUETMEjTZoFLogzPEoFURsFUQIENvTUPYUUTFgiZT0TR3sTN1MDUAkTUP0TPRokZvjFRDsldTQENpQEUqo2TNgCLQEzZpMEZ2f1S23RUPIUQTMkYpYTV3fDZQkzcDUUQIAyUAEUQUETS5IEZ2f1S23RUPIUQTMkYpYTV3fDZQkzcDUUQIAyUCUUQU8TVpEEZ2f1S23RUPIUQTMkYpYTV3fDZQkzcDUUQIAyUDUkdPEzZqgTcyLzSPUjZTEDLDgzaQY0SngEURwTTUEkT3TEUncCZOciKUAkTEQ0TlolQYgCRnEUR2QTUEkDLWIUUDMUQEoGUEkDdKkicCQUPIUETMEjTZoFLogjQqQzTTUkZTUVSUU0TQUETIQiZHU2LC8DTEoFUAACQH8VTV8DZ5o2TDgSUPQUTUA0PyoFR0MyPOAUQpQUPvPDRuEkUOgld5MEQ3TTTE0DUPkUR3sTN1MDUAkTUP0TPRokZvjFRMgCQQU1cTEkUUQzTncCZOciKUAkTEQ0TlolQYgCRRM0SQo2URUDQUkDNpgTcyLzSPUjZTEDLDgzaQY0SnomdSQDNqQUQ2QUTA0TUQg1Mn8zMtTETRUDUSYlZFkENHI0TOEkdWMUUvPEUEQkTNkDdKkicCQUPIUETMEjTZoFLogjTUoVUEkzZPUVQTM0SUs1TTkDdKkicCQUPIUETMEjTZoFLogjTUoVUEkzZPUVTUIUSUoFR0MyPOUmKqQUQMUUTT0zZO4hKt3hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEVtPDTtHzZGI1YMIiXtPDTtLjKPcjKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
+    <LAYOUT>
+      <INPUTS/>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <CONNECTION srcFilter="2" srcChannel="4096" dstFilter="6" dstChannel="4096"/>
+  <CONNECTION srcFilter="6" srcChannel="0" dstFilter="3" dstChannel="0"/>
+  <CONNECTION srcFilter="6" srcChannel="1" dstFilter="3" dstChannel="1"/>
+</FILTERGRAPH>
