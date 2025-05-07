@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    WaveformPanel.cpp
-    Created: 22 Apr 2025 4:14:56pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "WaveformPanel.h"
 
 WaveformPanelComponent::WaveformPanelComponent(FMSynthAudioProcessor& p) : m_audioProcessor(p)

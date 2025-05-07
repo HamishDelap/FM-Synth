@@ -1,36 +1,34 @@
-#ifndef _JSTATEMANAGER_
-#define _JSTATEMANAGER_
-
+#pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 
-using namespace juce;
 class JStateManager
 {
     public:
-        JStateManager(AudioProcessor& audioProcessor);
+        JStateManager(juce::AudioProcessor& audioProcessor);
 
-        void writeState(MemoryBlock&);
+        void writeState(juce::MemoryBlock&);
         void readState(const void*, int);
 
-        void writePreset(String presetName);
-        void readPreset(String presetName);
+        void writePreset(const juce::String& presetName);
+        void readPreset(const juce::String& presetName);
 
-        AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
+        static juce::StringArray getPresets();
+        static juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
 
-        StringArray getPresets();
-        AudioProcessorValueTreeState apvt; // Could be std::unique_pointer?
+        juce::AudioProcessorValueTreeState apvt; // Could be std::unique_pointer?
 
     private:
-        static File getPresetDirectory()
+        static std::optional<juce::File> getPresetDirectory()
 		{
-            const String presetFolderString(File::getSpecialLocation(File::SpecialLocationType::userDocumentsDirectory).getFullPathName() + File::getSeparatorString() + "MODULA");
-            const File presetFolder(presetFolderString);
+            const juce::String presetFolderString(juce::File::getSpecialLocation(juce::File::SpecialLocationType::userDocumentsDirectory).getFullPathName() + juce::File::getSeparatorString() + "MODULA");
+            const juce::File presetFolder(presetFolderString);
             if (presetFolder.isDirectory() == false)
             {
-                presetFolder.createDirectory();
+                if (auto result = presetFolder.createDirectory(); result.failed())
+                {
+                    return std::nullopt;
+                }
             }
             return(presetFolder);
 		}
 };
-
-#endif

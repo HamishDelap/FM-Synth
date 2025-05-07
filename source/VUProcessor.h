@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    VUProcessor.h
-    Created: 28 Apr 2025 12:36:05pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 
@@ -16,7 +6,7 @@ class VUProcessor
 public:
     VUProcessor(double sampleRate, double bufferTime, int numChannels = 1);
     
-    void PushBuffer(juce::AudioBuffer<float>& inBuffer);
+    void PushBuffer(const juce::AudioBuffer<float>& inBuffer);
     bool PullBuffer(juce::AudioBuffer<float>& outBuffer);
 
 private:

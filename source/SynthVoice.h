@@ -1,30 +1,24 @@
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
-
-#include "lldsp.h"
 #include "lldsp.oscillators.oscillator.h"
 #include "lldsp.dsp.h"
-#include "lldsp.effects.reverb.h"
-#include "lldsp.effects.distortion.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {
 public:
     SynthVoice() = default;
 
-    // SynthesizerVoice
-    bool canPlaySound(juce::SynthesiserSound* sound);
+    bool canPlaySound(juce::SynthesiserSound* sound) override;
 
-    void startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition);
-    void stopNote(float velocity, bool allowTailOff);
+    void startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition) override;
+    void stopNote(float velocity, bool allowTailOff) override;
 
-    void pitchWheelMoved(int newPitchWheelValue);
-    void controllerMoved(int controllerNumber, int newControllerValue);
-    float getControllerValue();
+    void pitchWheelMoved(int newPitchWheelValue) override;
+    void controllerMoved(int controllerNumber, int newControllerValue) override;
 
-    void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples);
+    void renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override;
 
-    // SynthVoice
+    float getControllerValue() const;
     void SetSampleRate(const double sampleRate);
 
     struct Parameters

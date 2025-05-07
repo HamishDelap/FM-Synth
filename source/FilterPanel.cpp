@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    FilterPanel.cpp
-    Created: 2 Apr 2025 10:24:18am
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "FilterPanel.h"
 
 FilterPanelComponent::FilterPanelComponent(FMSynthAudioProcessor& p)
@@ -20,13 +10,13 @@ FilterPanelComponent::FilterPanelComponent(FMSynthAudioProcessor& p)
         slider.addListener(pThis);
         slider.setSliderStyle(juce::Slider::Rotary);
         slider.setLookAndFeel(&pThis->m_knobLookAndFeel);
-        slider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+        slider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(pThis->m_audioProcessor.m_stateManager.apvt, paramId, slider);
     };
 
     // Filter
     addAndMakeVisible(m_cutoffLabel);
-    m_cutoffLabel.setFont(juce::Font(24.0f, juce::Font::plain));
+    m_cutoffLabel.setFont(juce::FontOptions(24.0f, juce::Font::plain));
     m_cutoffLabel.setColour(juce::Label::textColourId, juce::Colour::fromRGB(234, 234, 234));
     std::stringstream cutoffStream;
     cutoffStream << std::fixed << std::setprecision(0) << m_audioProcessor.m_stateManager.apvt.getRawParameterValue("FILTER_CUTOFF")->load();
@@ -61,7 +51,7 @@ void FilterPanelComponent::resized()
     m_releaseKnob.setBounds(17 + 95 * 3, 258, knobSize, knobSize);
 }
 
-void FilterPanelComponent::sliderValueChanged(Slider* slider)
+void FilterPanelComponent::sliderValueChanged(juce::Slider*)
 {
     UpdateLabels();
 }

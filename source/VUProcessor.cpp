@@ -1,23 +1,13 @@
-/*
-  ==============================================================================
-
-    VUProcessor.cpp
-    Created: 28 Apr 2025 12:36:05pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "VUProcessor.h"
 
-VUProcessor::VUProcessor(double sampleRate, double bufferTime, int numChannels) : m_fifo(bufferTime * sampleRate)
+VUProcessor::VUProcessor(double sampleRate, double bufferTime, int numChannels) : m_fifo(static_cast<int>(bufferTime * sampleRate))
 {
     m_numChannels = numChannels;
-    m_bufferSize = bufferTime * sampleRate;
+    m_bufferSize = static_cast<int>(bufferTime * sampleRate);
 	m_buffer = juce::AudioBuffer<float>(numChannels, m_bufferSize);
 }
     
-void VUProcessor::PushBuffer(juce::AudioBuffer<float>& inBuffer)
+void VUProcessor::PushBuffer(const juce::AudioBuffer<float>& inBuffer)
 {
     const int numSamplesToWrite = inBuffer.getNumSamples();
 

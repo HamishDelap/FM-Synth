@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    PresetBarLookAndFeel.h
-    Created: 25 Apr 2025 5:05:43pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 

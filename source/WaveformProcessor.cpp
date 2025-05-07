@@ -1,19 +1,9 @@
-/*
-  ==============================================================================
-
-    WaveformProcessor.cpp
-    Created: 22 Apr 2025 4:15:14pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "WaveformProcessor.h"
 
-WaveformProcessor::WaveformProcessor(double sampleRate, double bufferTime, int numChannels) : m_fifo(bufferTime * sampleRate)
+WaveformProcessor::WaveformProcessor(double sampleRate, double bufferTime, int numChannels) : m_fifo(static_cast<int>(bufferTime * sampleRate))
 {
     m_numChannels = numChannels;
-    m_bufferSize = bufferTime * sampleRate;
+    m_bufferSize = static_cast<int>(bufferTime * sampleRate);
     for (int i = 0; i < numChannels; ++i)
         m_buffer.add(new juce::AudioBuffer<float>(1, m_bufferSize));
 }

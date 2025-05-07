@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    WaveformPanel.h
-    Created: 22 Apr 2025 4:14:56pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 #include "PluginProcessor.h"
@@ -21,7 +11,7 @@ public:
     void paint(juce::Graphics&) override;
     void timerCallback() override;
 
-    int FindRisingZeroCrossing(const float* data, int numSamples);
+    static int FindRisingZeroCrossing(const float* data, int numSamples);
 
 private:
     FMSynthAudioProcessor& m_audioProcessor;

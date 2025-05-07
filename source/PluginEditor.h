@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <juce_audio_processors/juce_audio_processors.h>
@@ -33,25 +25,27 @@ public:
     void resized() override;
 
 private:
-    void UpdatePanel(PanelSelector::Panel& activePanel);
+    void UpdatePanel(const PanelSelector::Panel& activePanel);
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     FMSynthAudioProcessor& m_audioProcessor;
-    
-    KnobLookAndFeel m_lookAndFeel;
 
-    PanelSelector m_panelSelector;
-   
-    PresetBarComponent m_presetBar;
-
-    VUComponent m_vuMeter;
-
-    // Panels 
     OperatorPanelComponent m_operatorPanel;
     FilterPanelComponent m_filterPanel;
     EffectsPanelComponent m_effectsPanel;
     WaveformPanelComponent m_waveformPanel;
+
+    PresetBarComponent m_presetBar;
+
+    VUComponent m_vuMeter;
+
+    KnobLookAndFeel m_lookAndFeel;
+
+    PanelSelector m_panelSelector;
+   
+
+    // Panels 
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FMSynthAudioProcessorEditor)
 };

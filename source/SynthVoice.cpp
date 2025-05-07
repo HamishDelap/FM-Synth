@@ -8,7 +8,7 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 	return dynamic_cast<SynthSound*>(sound) != nullptr;
 }
 
-void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
+void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* /*sound*/, int /*currentPitchWheelPosition*/)
 {
 	m_trueFrequency = juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber);
 	UpdateFrequency();
@@ -29,7 +29,7 @@ void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::Synthesiser
 	m_modulator.Reset();
 }
 
-void SynthVoice::stopNote(float velocity, bool allowTailOff)
+void SynthVoice::stopNote(float /*velocity*/, bool allowTailOff)
 {
 	m_noteOn = false;
 	if (allowTailOff)
@@ -67,14 +67,15 @@ void SynthVoice::UpdateFrequency()
 	m_newFrequency = m_trueFrequency * std::pow(2.0f, m_pitchBendChange / 12.0f);
 }
 
-void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
+void SynthVoice::controllerMoved(int /*controllerNumber*/, int newControllerValue)
 {
+	// TODO: Better handle controller
 	m_controllerValue = newControllerValue;
 }
 
-float SynthVoice::getControllerValue()
+float SynthVoice::getControllerValue() const
 {
-	return m_controllerValue;
+	return static_cast<float>(m_controllerValue);
 }
     
 void SynthVoice::SetSampleRate(const double sampleRate)
@@ -122,7 +123,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 
 		for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
 		{
-			outputBuffer.addSample(channel, startSample, sample);
+			outputBuffer.addSample(channel, startSample, static_cast<float>(sample));
 		}
 		
 		if (!m_carrierEnvelope.IsActive())

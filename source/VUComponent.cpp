@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    VUComponent.cpp
-    Created: 28 Apr 2025 12:36:19pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "VUComponent.h"
 #include "BinaryData.h"
 
@@ -34,7 +24,7 @@ VUComponent::~VUComponent()
 }
 
 using MeterDBFSPoint = std::pair<float, float>; // dBFS, meter level
-const std::array<MeterDBFSPoint, 8> DBFS_METER_POINTS= {
+constexpr std::array<MeterDBFSPoint, 8> DBFS_METER_POINTS= {
     MeterDBFSPoint{0.0f, 1.0f},
     MeterDBFSPoint{-10.0f, 0.75f},
     MeterDBFSPoint{-20.0f, 0.5f},
@@ -63,7 +53,7 @@ float VUComponent::dBFSToMeterLevel(float dbfsLevel)
     return 0.0;
 }
 
-std::pair<float, float> VUComponent::GetMeterLevels()
+std::pair<float, float> VUComponent::GetMeterLevels() const
 {
     auto bufferSize = m_meterBuffer.getNumSamples();
     auto leftChannel = m_meterBuffer.getReadPointer(0);
@@ -83,8 +73,8 @@ std::pair<float, float> VUComponent::GetMeterLevels()
         }
     }
 
-    float leftdBFS = leftPeak == 0.0 ? -100.0 : 20.0 * std::log10(leftPeak);
-    float rightdBFS = rightPeak == 0.0 ? -100.0 : 20.0 * std::log10(rightPeak);
+    float leftdBFS = leftPeak == 0.0f ? -100.0f : 20.0f * std::log10(leftPeak);
+    float rightdBFS = rightPeak == 0.0f ? -100.0f : 20.0f * std::log10(rightPeak);
 
     float leftMeterLevel = dBFSToMeterLevel(leftdBFS);
     float rightMeterLevel = dBFSToMeterLevel(rightdBFS);
@@ -94,9 +84,9 @@ std::pair<float, float> VUComponent::GetMeterLevels()
 
 void VUComponent::paint(juce::Graphics& g)
 {
-    const int leftX = 10;
-    const int rightX = 20;
-    const int topY = 10;
+    constexpr int leftX = 10;
+    constexpr int rightX = 20;
+    constexpr int topY = 10;
 
     auto [leftLevel, rightLevel] = GetMeterLevels();
 
@@ -104,10 +94,10 @@ void VUComponent::paint(juce::Graphics& g)
     rightLevel = (rightLevel > 1.0) ? 10 : floor(rightLevel * 10);
 
     if (leftLevel >= 0 && leftLevel < m_levelImages.size())
-        g.drawImageAt(m_levelImages[leftLevel], leftX, topY);
+        g.drawImageAt(m_levelImages[static_cast<size_t>(leftLevel)], leftX, topY);
 
     if (rightLevel >= 0 && rightLevel < m_levelImages.size())
-        g.drawImageAt(m_levelImages[rightLevel], rightX, topY);
+        g.drawImageAt(m_levelImages[static_cast<size_t>(rightLevel)], rightX, topY);
 }
 
 void VUComponent::timerCallback()

@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    EffectsPanel.cpp
-    Created: 2 Apr 2025 10:24:34am
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "EffectsPanel.h"
 
 EffectsPanelComponent::EffectsPanelComponent(FMSynthAudioProcessor& p)
@@ -22,7 +12,7 @@ EffectsPanelComponent::EffectsPanelComponent(FMSynthAudioProcessor& p)
         slider.addListener(pThis);
         slider.setSliderStyle(juce::Slider::Rotary);
         slider.setLookAndFeel(&pThis->m_knobLookAndFeel);
-        slider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+        slider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(pThis->m_audioProcessor.m_stateManager.apvt, paramId, slider);
     };
 
@@ -49,5 +39,5 @@ void EffectsPanelComponent::resized()
     m_reverbAmountKnob.setBounds(216, 243, knobSize, knobSize);
 }
 
-void EffectsPanelComponent::sliderValueChanged(Slider* slider)
+void EffectsPanelComponent::sliderValueChanged(juce::Slider*)
 {}

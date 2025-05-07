@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <juce_audio_processors/juce_audio_processors.h>
@@ -14,6 +6,7 @@
 #include "JStateManager.h"
 #include "WaveformProcessor.h"
 #include "VUProcessor.h"
+#include "lldsp.effects.reverb.h"
 
 //==============================================================================
 /**
@@ -26,7 +19,7 @@ class FMSynthAudioProcessor  : public juce::AudioProcessor
 public:
     //==============================================================================
     FMSynthAudioProcessor();
-    ~FMSynthAudioProcessor() override;
+    ~FMSynthAudioProcessor() override = default;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -62,8 +55,8 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     // Only call from UI
-    bool GetWaveformVisualisationBuffer(juce::AudioBuffer<float>& outBuffer);
-    bool GetVUMeterBuffer(juce::AudioBuffer<float>& outBuffer);
+    bool GetWaveformVisualisationBuffer(juce::AudioBuffer<float>& outBuffer) const;
+    bool GetVUMeterBuffer(juce::AudioBuffer<float>& outBuffer) const;
 
     juce::MidiKeyboardState m_keyboardState;
     JStateManager m_stateManager;

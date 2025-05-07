@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    PresetBarLookAndFeel.cpp
-    Created: 25 Apr 2025 5:05:43pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "PresetBarLookAndFeel.h"
 
 void PresetBarLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
@@ -50,28 +40,16 @@ void PresetBarLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int
         g.setColour(fill);
         g.strokePath(valueArc, juce::PathStrokeType(lineW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
     }
-
-    auto thumbWidth = lineW * 2.0f;
 }
 
 void PresetBarLookAndFeel::drawComboBox(juce::Graphics& g, int width, int height, bool,
     int, int, int, int, juce::ComboBox& box)
 {
-    auto cornerSize = box.findParentComponentOfClass<juce::ChoicePropertyComponent>() != nullptr ? 0.0f : 3.0f;
-    juce::Rectangle<int> boxBounds(0, 0, width, height);
-
-    // Take out background and outline
- //   g.setColour(juce::Colour::fromRGB(37, 39, 43));
- //   g.fillRoundedRectangle(boxBounds.toFloat(), cornerSize);
-
-//    g.setColour(juce::Colour::fromRGB(99, 99, 99));
-//    g.drawRoundedRectangle(boxBounds.toFloat().reduced(0.5f, 0.5f), cornerSize, 1.0f);
-
     juce::Rectangle<int> arrowZone(width - 30, 0, 20, height);
     juce::Path path;
-    path.startNewSubPath((float)arrowZone.getX() + 3.0f, (float)arrowZone.getCentreY() - 2.0f);
-    path.lineTo((float)arrowZone.getCentreX(), (float)arrowZone.getCentreY() + 3.0f);
-    path.lineTo((float)arrowZone.getRight() - 3.0f, (float)arrowZone.getCentreY() - 2.0f);
+    path.startNewSubPath(static_cast<float>(arrowZone.getX() + 3.0f), static_cast<float>(arrowZone.getCentreY() - 2.0f));
+    path.lineTo(static_cast<float>(arrowZone.getCentreX()), static_cast<float>(arrowZone.getCentreY() + 3.0f));
+    path.lineTo(static_cast<float>(arrowZone.getRight() - 3.0f), static_cast<float>(arrowZone.getCentreY() - 2.0f));
 
     g.setColour(box.findColour(juce::ComboBox::arrowColourId).withAlpha((box.isEnabled() ? 0.9f : 0.2f)));
     g.strokePath(path, juce::PathStrokeType(1.5f));
@@ -84,10 +62,10 @@ void PresetBarLookAndFeel::drawPopupMenuBackground(juce::Graphics& g, [[maybe_un
 
 juce::Font PresetBarLookAndFeel::getComboBoxFont(juce::ComboBox& box)
 {
-    return box.withDefaultMetrics(juce::FontOptions{ juce::jmin(16.0f, (float)box.getHeight() * 0.75f) });
+    return box.withDefaultMetrics(juce::FontOptions{ juce::jmin(16.0f, static_cast<float>(box.getHeight() * 0.75f)) });
 }
 
-void PresetBarLookAndFeel::drawTextEditorOutline (juce::Graphics& g, int width, int height, juce::TextEditor& textEditor)
+void PresetBarLookAndFeel::drawTextEditorOutline (juce::Graphics&, int, int, juce::TextEditor&)
 {
     // Dont show the outline
 }

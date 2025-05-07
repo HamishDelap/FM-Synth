@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    EffectsPanel.h
-    Created: 2 Apr 2025 10:24:34am
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 #include "PluginProcessor.h"
@@ -22,7 +12,7 @@ public:
     void paint(juce::Graphics&) override;
     void resized() override;
 
-    void sliderValueChanged(Slider* slider) override;
+    void sliderValueChanged(juce::Slider* slider) override;
 
 private:
     FMSynthAudioProcessor& m_audioProcessor;

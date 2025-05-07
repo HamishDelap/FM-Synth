@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    VUComponent.h
-    Created: 28 Apr 2025 12:36:19pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 #include "PluginProcessor.h"
@@ -22,7 +12,7 @@ public:
     void timerCallback() override;
 
     static float dBFSToMeterLevel(float);
-    std::pair<float, float> GetMeterLevels();
+    std::pair<float, float> GetMeterLevels() const;
 
 private:
     FMSynthAudioProcessor& m_audioProcessor;

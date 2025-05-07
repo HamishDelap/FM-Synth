@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    PanelSelector.cpp
-    Created: 23 Apr 2025 6:44:10pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "PanelSelector.h"
 #include "BinaryData.h"
 
@@ -71,7 +61,7 @@ PanelSelector::PanelSelector()
 
 }
 
-PanelSelector::Panel PanelSelector::GetActivePanel()
+PanelSelector::Panel PanelSelector::GetActivePanel() const
 {
     return m_currentPanel;
 }
@@ -88,7 +78,7 @@ void PanelSelector::resized()
     m_waveformButton.setBounds(136, 9, 38, 30);
 }
 
-void PanelSelector::SetButtonCallback(OnClickCallback callback)
+void PanelSelector::SetButtonCallback(const OnClickCallback& callback)
 {
     m_callback = callback;
 }

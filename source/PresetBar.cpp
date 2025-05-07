@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    PresetBar.cpp
-    Created: 23 Apr 2025 8:39:48pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "PresetBar.h"
 #include "BinaryData.h"
 
@@ -58,9 +48,9 @@ PresetBarComponent::PresetBarComponent(JStateManager& stateManager) : m_stateMan
 				m_stateManager.readPreset(preset);
 			}
 		}
-		catch (std::out_of_range& ex)
+		catch (std::out_of_range&)
 		{
-			// Id's have gone out of whack
+			// TODO: Handle preset IDs getting out of whack
 			jassertfalse;
 		}
 	};
@@ -90,7 +80,7 @@ void PresetBarComponent::paint(juce::Graphics& g)
 	g.drawRoundedRectangle(r.reduced(0.5f), 4.0f, 1.0f);
 
 	// Divider
-	float iconWidth = getHeight() - 2;
+	float iconWidth = static_cast<float>(getHeight() - 2);
 	g.setColour(juce::Colour::fromRGB(60, 60, 60));
 	g.drawLine(iconWidth, 4.0f, iconWidth, getHeight() - 4.0f, 1.0f);
 }

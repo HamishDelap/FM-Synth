@@ -1,12 +1,6 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
+#include "lldsp.effects.reverb.h"
+#include "lldsp.effects.distortion.h"
 #include "PluginEditor.h"
 #include "SynthVoice.h"
 #include "SynthSound.h"
@@ -21,7 +15,7 @@ FMSynthAudioProcessor::FMSynthAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       ), m_stateManager(*this)
+                       ), m_stateManager(*this), m_parameters()
 #endif
 {
     m_synthesizer.clearVoices();
@@ -33,10 +27,6 @@ FMSynthAudioProcessor::FMSynthAudioProcessor()
     m_synthesizer.clearSounds();
     // Add a new sound.
     m_synthesizer.addSound(new SynthSound());
-}
-
-FMSynthAudioProcessor::~FMSynthAudioProcessor()
-{
 }
 
 //==============================================================================
@@ -88,16 +78,16 @@ int FMSynthAudioProcessor::getCurrentProgram()
     return 0;
 }
 
-void FMSynthAudioProcessor::setCurrentProgram (int index)
+void FMSynthAudioProcessor::setCurrentProgram (int /*index*/)
 {
 }
 
-const juce::String FMSynthAudioProcessor::getProgramName (int index)
+const juce::String FMSynthAudioProcessor::getProgramName (int /*index*/)
 {
     return {};
 }
 
-void FMSynthAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void FMSynthAudioProcessor::changeProgramName (int /*index*/, const juce::String& /*newName*/)
 {
 }
 
@@ -193,12 +183,12 @@ void FMSynthAudioProcessor::UpdateVoiceParameters()
 
 static float CubicClipper(float sample)
 {
-	if (sample > 1.0)
-		return 2.0 / 3.0;
-	else if (sample < -1.0)
-		return -2.0 / 3.0;
+	if (sample > 1.0f)
+		return 2.0f / 3.0f;
+	else if (sample < -1.0f)
+		return -2.0f / 3.0f;
 	else
-		return (sample - (sample * sample * sample) / 3.0);
+		return (sample - (sample * sample * sample) / 3.0f);
 }
 
 void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -212,10 +202,10 @@ void FMSynthAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
     {
         auto* rChannelData = buffer.getWritePointer(1, 0);
         auto* lChannelData = buffer.getWritePointer(0, 0);
-        rChannelData[sampleIndex] = m_reverb->Process(rChannelData[sampleIndex], m_parameters.reverbTime, m_parameters.reverbAmount);
+        rChannelData[sampleIndex] = static_cast<float>(m_reverb->Process(static_cast<double>(rChannelData[sampleIndex]), m_parameters.reverbTime, m_parameters.reverbAmount));
         if (m_parameters.distortionGain > 0)
         {
-			rChannelData[sampleIndex] = lldsp::effects::DafxDistortion(rChannelData[sampleIndex], m_parameters.distortionGain);
+			rChannelData[sampleIndex] = static_cast<float>(lldsp::effects::DafxDistortion(static_cast<double>(rChannelData[sampleIndex]), m_parameters.distortionGain));
         }
 
         // Soft Clipping
@@ -255,7 +245,7 @@ void FMSynthAudioProcessor::setStateInformation (const void* data, int sizeInByt
     m_stateManager.readState(data, sizeInBytes);
 }
 
-bool FMSynthAudioProcessor::GetWaveformVisualisationBuffer(juce::AudioBuffer<float>& outBuffer)
+bool FMSynthAudioProcessor::GetWaveformVisualisationBuffer(juce::AudioBuffer<float>& outBuffer) const
 {
     if (m_pWaveformProcessor)
     {
@@ -264,7 +254,7 @@ bool FMSynthAudioProcessor::GetWaveformVisualisationBuffer(juce::AudioBuffer<flo
     return false;
 }
 
-bool FMSynthAudioProcessor::GetVUMeterBuffer(juce::AudioBuffer<float>& outBuffer)
+bool FMSynthAudioProcessor::GetVUMeterBuffer(juce::AudioBuffer<float>& outBuffer) const
 {
     if (m_pVUMeterProcessor)
     {
@@ -274,7 +264,7 @@ bool FMSynthAudioProcessor::GetVUMeterBuffer(juce::AudioBuffer<float>& outBuffer
 }
 
 //==============================================================================
-// This creates new instances of the plugin..
+// This creates new instances of the plugin.
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new FMSynthAudioProcessor();

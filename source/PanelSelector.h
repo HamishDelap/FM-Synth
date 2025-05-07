@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    PanelSelector.h
-    Created: 23 Apr 2025 6:44:10pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 
@@ -24,10 +14,10 @@ public:
         Effects   = 2,
         Waveform  = 3
     };
-    Panel GetActivePanel();
+    Panel GetActivePanel() const;
 
     using OnClickCallback = std::function<void(Panel)>;
-    void SetButtonCallback(OnClickCallback callback);
+    void SetButtonCallback(const OnClickCallback& callback);
 
 private:
     OnClickCallback m_callback;

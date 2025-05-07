@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "BinaryData.h"
@@ -91,7 +83,7 @@ void FMSynthAudioProcessorEditor::resized()
 	m_waveformPanel.setBounds(57, 72, 401, 371);
 }
 
-void FMSynthAudioProcessorEditor::UpdatePanel(PanelSelector::Panel& activePanel)
+void FMSynthAudioProcessorEditor::UpdatePanel(const PanelSelector::Panel& activePanel)
 {
     switch (activePanel)
     {

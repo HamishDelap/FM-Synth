@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    OperatorPanel.cpp
-    Created: 2 Apr 2025 10:24:08am
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #include "OperatorPanel.h"
 
 OperatorPanelComponent::OperatorPanelComponent(FMSynthAudioProcessor& p)
@@ -22,13 +12,13 @@ OperatorPanelComponent::OperatorPanelComponent(FMSynthAudioProcessor& p)
         slider.addListener(pThis);
         slider.setSliderStyle(juce::Slider::Rotary);
         slider.setLookAndFeel(&pThis->m_knobLookAndFeel);
-        slider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+        slider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(pThis->m_audioProcessor.m_stateManager.apvt, paramId, slider);
     };
 
     //  Modulator
     addAndMakeVisible(m_modRatioLabel);
-    m_modRatioLabel.setFont(juce::Font(24.0f, juce::Font::plain));
+    m_modRatioLabel.setFont(juce::FontOptions(24.0, juce::Font::plain));
     m_modRatioLabel.setColour(juce::Label::textColourId, juce::Colour::fromRGB(234, 234, 234));
     std::stringstream modIndexStream;
     modIndexStream << std::fixed << std::setprecision(2) << m_audioProcessor.m_stateManager.apvt.getRawParameterValue("MOD_RATIO")->load();
@@ -74,10 +64,10 @@ void OperatorPanelComponent::resized()
     m_releaseKnob.setBounds(17 + 95 * 3, 258, knobSize, knobSize);
 }
 
-void OperatorPanelComponent::comboBoxChanged(ComboBox* newComboBox)
+void OperatorPanelComponent::comboBoxChanged(juce::ComboBox* )
 {}
 
-void OperatorPanelComponent::sliderValueChanged(Slider* slider)
+void OperatorPanelComponent::sliderValueChanged(juce::Slider* slider)
 {
     if (slider == &m_modRatioKnob)
         UpdateLabels(slider->getValue());

@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    PresetBar.h
-    Created: 23 Apr 2025 8:39:48pm
-    Author:  hamis
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 #include "JStateManager.h"
