@@ -66,7 +66,7 @@ juce::StringArray JStateManager::getPresets()
         return {};
     }
     juce::StringArray presets;
-    for (juce::DirectoryEntry entry : juce::RangedDirectoryIterator(presetDirectory.value(), true)) {
+    for (const juce::DirectoryEntry& entry : juce::RangedDirectoryIterator(presetDirectory.value(), true)) {
 		presets.add(entry.getFile().getFileName());
     }
 	return presets;
@@ -85,21 +85,28 @@ juce::AudioProcessorValueTreeState::ParameterLayout JStateManager::getParameterL
         params.add(std::make_unique<juce::AudioParameterFloat>("MOD_DECAY", "Modulator Decay", 0.0f, 10.0f, 0.2f));
         params.add(std::make_unique<juce::AudioParameterFloat>("MOD_SUSTAIN", "Modulator Sustain", 0.0f, 10.0f, 1.0f));
         params.add(std::make_unique<juce::AudioParameterFloat>("MOD_RELEASE", "Modulator Release", 0.0f, 10.0f, 0.5f));
-        
+
         // Carrier
         params.add(std::make_unique<juce::AudioParameterInt>("CARRIER_WAVEFORM", "Carrier Waveform", 1, 4, 4));
-        params.add(std::make_unique<juce::AudioParameterFloat>("CARRIER_ATTACK", "Carrier Attack", 0.0f, 10.0f, 0.25f));
-        params.add(std::make_unique<juce::AudioParameterFloat>("CARRIER_DECAY", "Carrier Decay", 0.0f, 10.0f, 0.2f));
+        juce::NormalisableRange<float> carrierAttackRange{0.01f, 10.0f, 0.01f, 0.6f};
+        params.add(std::make_unique<juce::AudioParameterFloat>("CARRIER_ATTACK", "Carrier Attack", carrierAttackRange, 0.25f));
+        juce::NormalisableRange<float> carrierDecayRange{0.01f, 10.0f, 0.01f, 0.6f};
+        params.add(std::make_unique<juce::AudioParameterFloat>("CARRIER_DECAY", "Carrier Decay", carrierDecayRange, 0.2f));
         params.add(std::make_unique<juce::AudioParameterFloat>("CARRIER_SUSTAIN", "Carrier Sustain", 0.0f, 1.0f, 1.0f));
-        params.add(std::make_unique<juce::AudioParameterFloat>("CARRIER_RELEASE", "Carrier Release", 0.0f, 10.0f, 0.5f));
+        juce::NormalisableRange<float> carrierReleaseRange{0.01f, 10.0f, 0.01f, 0.6f};
+        params.add(std::make_unique<juce::AudioParameterFloat>("CARRIER_RELEASE", "Carrier Release", carrierReleaseRange, 0.5f));
 
         // Filter
-        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_CUTOFF", "Filter Cutoff", 10.0f, 20000.0f, 3000.0f));
+        juce::NormalisableRange<float> cutoffRange{10.0f, 20000.0f, 10.0f, 0.6f};
+        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_CUTOFF", "Filter Cutoff", cutoffRange, 3000.0f));
         params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_Q", "Filter Q", 0.5f, 1.5f, 0.0f));
-        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_ATTACK", "Filter Attack", 0.01f, 10.0f, 0.5f));
-        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_DECAY", "Filter Decay", 0.0f, 10.0f, 0.2f));
+        juce::NormalisableRange<float> filterAttackRange{0.01f, 10.0f, 0.01f, 0.6f};
+        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_ATTACK", "Filter Attack", filterAttackRange, 0.5f));
+        juce::NormalisableRange<float> filterDecayRange{0.01f, 10.0f, 0.01f, 0.6f};
+        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_DECAY", "Filter Decay", filterDecayRange, 0.2f));
         params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_SUSTAIN", "Filter Sustain", 0.0f, 1.0f, 0.8f));
-        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_RELEASE", "Filter Release", 0.0f, 10.0f, 0.5f));
+        juce::NormalisableRange<float> filterReleaseRange{0.01f, 10.0f, 0.01f, 0.6f};
+        params.add(std::make_unique<juce::AudioParameterFloat>("FILTER_RELEASE", "Filter Release", filterReleaseRange, 0.5f));
 
         // Reverb
         params.add(std::make_unique<juce::AudioParameterFloat>("REVERB_TIME", "Reverb Time", 0.0f, 10.0f, 1.0f));
