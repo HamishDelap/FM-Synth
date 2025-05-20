@@ -6,8 +6,8 @@
 class EffectsPanelComponent : public juce::Component, public juce::Slider::Listener
 {
 public:
-    EffectsPanelComponent(FMSynthAudioProcessor&);
-    ~EffectsPanelComponent() override;
+    explicit EffectsPanelComponent(FMSynthAudioProcessor&);
+    ~EffectsPanelComponent() override = default;
 
     void paint(juce::Graphics&) override;
     void resized() override;

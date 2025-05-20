@@ -19,10 +19,6 @@ VUComponent::VUComponent(FMSynthAudioProcessor& p) : m_audioProcessor(p)
     m_levelImages[10] = juce::ImageFileFormat::loadFrom(BinaryData::vu10_png, BinaryData::vu10_pngSize);
 }
 
-VUComponent::~VUComponent()
-{
-}
-
 using MeterDBFSPoint = std::pair<float, float>; // dBFS, meter level
 constexpr std::array<MeterDBFSPoint, 8> DBFS_METER_POINTS= {
     MeterDBFSPoint{0.0f, 1.0f},

@@ -44,9 +44,6 @@ OperatorPanelComponent::OperatorPanelComponent(FMSynthAudioProcessor& p)
     InitSlider(m_releaseKnob, m_pReleaseKnobAttachment, "CARRIER_RELEASE");
 }
 
-OperatorPanelComponent::~OperatorPanelComponent()
-{}
-
 void OperatorPanelComponent::paint(juce::Graphics&)
 {}
 

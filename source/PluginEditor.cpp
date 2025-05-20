@@ -72,9 +72,7 @@ void FMSynthAudioProcessorEditor::paint (juce::Graphics& g)
 void FMSynthAudioProcessorEditor::resized()
 {
     m_presetBar.setBounds(328, 28, 130, 26);
-
     m_panelSelector.setBounds(57, 35, 190, 38);
-
     m_vuMeter.setBounds(465, 190, 40, 120);
 
     m_operatorPanel.setBounds(57, 72, 401, 371);

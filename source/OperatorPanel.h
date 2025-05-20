@@ -6,8 +6,8 @@
 class OperatorPanelComponent : public juce::Component, public juce::ComboBox::Listener, public juce::Slider::Listener
 {
 public:
-    OperatorPanelComponent(FMSynthAudioProcessor&);
-    ~OperatorPanelComponent() override;
+    explicit OperatorPanelComponent(FMSynthAudioProcessor&);
+    ~OperatorPanelComponent() override = default;
 
     void paint(juce::Graphics&) override;
     void resized() override;

@@ -24,9 +24,6 @@ EffectsPanelComponent::EffectsPanelComponent(FMSynthAudioProcessor& p)
     InitSlider(m_distortionKnob, m_pDistortionAttachment, "DISTORTION_GAIN");
 }
 
-EffectsPanelComponent::~EffectsPanelComponent()
-{}
-
 void EffectsPanelComponent::paint(juce::Graphics&)
 {}
 

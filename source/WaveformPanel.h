@@ -6,7 +6,7 @@ class WaveformPanelComponent : public juce::Component, private juce::Timer
 {
 public:
     WaveformPanelComponent(FMSynthAudioProcessor&);
-    ~WaveformPanelComponent() override;
+    ~WaveformPanelComponent() override = default;
 
     void paint(juce::Graphics&) override;
     void timerCallback() override;

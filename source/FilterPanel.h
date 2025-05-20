@@ -6,8 +6,8 @@
 class FilterPanelComponent : public juce::Component, public juce::Slider::Listener
 {
 public:
-    FilterPanelComponent(FMSynthAudioProcessor&);
-    ~FilterPanelComponent() override;
+    explicit FilterPanelComponent(FMSynthAudioProcessor&);
+    ~FilterPanelComponent() override = default;
 
     void paint(juce::Graphics&) override;
     void resized() override;

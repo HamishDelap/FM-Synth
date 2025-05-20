@@ -5,8 +5,8 @@
 class VUComponent : public juce::Component, private juce::Timer
 {
 public:
-    VUComponent(FMSynthAudioProcessor&);
-    ~VUComponent() override;
+    explicit VUComponent(FMSynthAudioProcessor&);
+    ~VUComponent() override = default;
 
     void paint(juce::Graphics&) override;
     void timerCallback() override;

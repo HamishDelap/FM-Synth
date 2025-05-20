@@ -6,10 +6,6 @@ WaveformPanelComponent::WaveformPanelComponent(FMSynthAudioProcessor& p) : m_aud
     startTimerHz(30);
 }
 
-WaveformPanelComponent::~WaveformPanelComponent()
-{
-}
-
 int WaveformPanelComponent::FindRisingZeroCrossing(const float* data, int numSamples)
 {
     for (int i = 1; i < numSamples; ++i)

@@ -50,6 +50,20 @@ TEST_CASE("Midi On", "[instance]")
     REQUIRE(!IsBufferZeroed(audioBuffer));
 }
 
+TEST_CASE("Range", "[instance]")
+{
+
+    float i = 0;
+    while (i <= 1)
+    {
+        const auto targetValue = targetRange.convertFrom0to1(i);
+        INFO("i: " << i << " maps to: " << targetValue);
+        i += 0.02;
+    }
+
+    REQUIRE(i == 1);
+}
+
 #ifdef PAMPLEJUCE_IPP
     #include <ipp.h>
 

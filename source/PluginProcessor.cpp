@@ -105,7 +105,7 @@ void FMSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 
     for (int i = 0; i < m_synthesizer.getNumVoices(); i++) {
         // Check that myVoice is a SynthVoice*
-        if (SynthVoice* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
+        if (auto* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
             pVoice->SetSampleRate(sampleRate);
         }
     }
@@ -144,7 +144,7 @@ bool FMSynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
   #endif
 }
 #endif
-    
+
 void FMSynthAudioProcessor::UpdateVoiceParameters()
 {
     m_parameters.modRatio = m_stateManager.apvt.getRawParameterValue("MOD_RATIO")->load();
@@ -175,7 +175,7 @@ void FMSynthAudioProcessor::UpdateVoiceParameters()
     for (int i = 0; i < m_synthesizer.getNumVoices(); i++)
     {
         // Check that myVoice is a SynthVoice*
-        if (SynthVoice* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
+        if (auto* pVoice = dynamic_cast<SynthVoice*>(m_synthesizer.getVoice(i))) {
             pVoice->SetParameters(m_parameters);
         }
     }

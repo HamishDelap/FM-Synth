@@ -32,9 +32,6 @@ FilterPanelComponent::FilterPanelComponent(FMSynthAudioProcessor& p)
     InitSlider(m_releaseKnob, m_pReleaseAttachment, "FILTER_RELEASE");
 }
 
-FilterPanelComponent::~FilterPanelComponent()
-{}
-
 void FilterPanelComponent::paint(juce::Graphics&)
 {}
 
@@ -51,9 +48,10 @@ void FilterPanelComponent::resized()
     m_releaseKnob.setBounds(17 + 95 * 3, 258, knobSize, knobSize);
 }
 
-void FilterPanelComponent::sliderValueChanged(juce::Slider*)
+void FilterPanelComponent::sliderValueChanged(juce::Slider* slider)
 {
-    UpdateLabels();
+    if (slider == &m_cutoffKnob)
+        UpdateLabels();
 }
 
 void FilterPanelComponent::UpdateLabels()

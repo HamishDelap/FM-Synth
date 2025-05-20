@@ -6,7 +6,7 @@
 class PresetBarComponent : public juce::Component
 {
 public:
-    PresetBarComponent(JStateManager& stateManager);
+    explicit PresetBarComponent(JStateManager& stateManager);
 
     void resized() override;
     void paint(juce::Graphics& g) override;
